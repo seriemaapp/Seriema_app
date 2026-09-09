@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seriema · Gestão de chamados de manutenção</title>
+<meta name="description" content="Sistema de gestão de chamados de manutenção para empresas de facilities, contratos de manutenção predial, condomínios e varejo alimentício. A prioridade e o SLA de cada chamado saem do catálogo de sintomas, da criticidade do ativo e do tipo de parada.">
+<link rel="canonical" href="https://seriemaapp.com.br/">
+<meta name="author" content="Seriema">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#EEF3F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D171D" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icone-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Seriema">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://seriemaapp.com.br/">
+<meta property="og:title" content="O prazo do chamado não é chute.">
+<meta property="og:description" content="Sistema de gestão de chamados de manutenção para empresas de facilities, contratos de manutenção predial, condomínios e varejo alimentício. A prioridade e o SLA de cada chamado saem do catálogo de sintomas, da criticidade do ativo e do tipo de parada.">
+<meta property="og:image" content="https://seriemaapp.com.br/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Seriema — gestão de chamados de manutenção">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="O prazo do chamado não é chute.">
+<meta name="twitter:description" content="Sistema de gestão de chamados de manutenção para empresas de facilities, contratos de manutenção predial, condomínios e varejo alimentício. A prioridade e o SLA de cada chamado saem do catálogo de sintomas, da criticidade do ativo e do tipo de parada.">
+<meta name="twitter:image" content="https://seriemaapp.com.br/og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://seriemaapp.com.br/#org",
+      "name": "Seriema",
+      "url": "https://seriemaapp.com.br/",
+      "logo": "https://seriemaapp.com.br/icone-512.png",
+      "email": "contato@seriemaapp.com.br",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "vendas",
+        "telephone": "+55-11-98834-6666",
+        "email": "contato@seriemaapp.com.br",
+        "availableLanguage": "pt-BR"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://seriemaapp.com.br/#site",
+      "url": "https://seriemaapp.com.br/",
+      "name": "Seriema",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://seriemaapp.com.br/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Seriema",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Gestão de manutenção (CMMS)",
+      "operatingSystem": "Navegador web",
+      "url": "https://seriemaapp.com.br/",
+      "description": "Sistema de gestão de chamados de manutenção para empresas de facilities, contratos de manutenção predial, condomínios e varejo alimentício. A prioridade e o SLA de cada chamado saem do catálogo de sintomas, da criticidade do ativo e do tipo de parada.",
+      "publisher": {
+        "@id": "https://seriemaapp.com.br/#org"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Starter",
+          "description": "até 100 ativos",
+          "price": "690.00",
+          "priceCurrency": "BRL",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "690.00",
+            "priceCurrency": "BRL",
+            "unitCode": "MON"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "description": "de 101 a 300 ativos",
+          "price": "1290.00",
+          "priceCurrency": "BRL",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1290.00",
+            "priceCurrency": "BRL",
+            "unitCode": "MON"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise",
+          "description": "de 301 a 800 ativos",
+          "price": "2190.00",
+          "priceCurrency": "BRL",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "2190.00",
+            "priceCurrency": "BRL",
+            "unitCode": "MON"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+/* ============================================================
+   Seriema · site de prospecção — página estática, sem script.
+   Paleta e tipografia derivadas do manual da marca.
+   ============================================================ */
+:root{
+  --chao:#EEF3F6;
+  --chao-2:#E3EBF0;
+  --papel:#FFFFFF;
+  --tinta:#16242C;
+  --tinta-2:#33484F;
+  --mudo:#63798A;
+  --filete:#CBD9E1;
+  --filete-2:#DDE7EC;
+  --azul:#2F6DA8;
+  --azul-forte:#245883;
+  --azul-suave:#88BDD8;
+  --azul-lavado:#DCEAF3;
+  --trilho:#D6E2E9;
+  --p1:#B4453C;  --p1-fundo:#F7E4E2;
+  --p2:#B07524;  --p2-fundo:#F8ECD8;
+  --p3:#2C7F68;  --p3-fundo:#DFF0EA;
+  --p4:#63798A;  --p4-fundo:#E5EDF1;
+  --sobre-azul:#FFFFFF;
+  --sombra:0 1px 2px rgba(22,36,44,.05), 0 8px 24px -12px rgba(22,36,44,.18);
+  --sombra-alta:0 2px 4px rgba(22,36,44,.06), 0 24px 48px -20px rgba(22,36,44,.28);
+  --brilho-a:rgba(62,123,186,.16);
+  --brilho-b:rgba(136,189,216,.20);
+  --d:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --b:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --m:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --chao:#0D171D;
+    --chao-2:#111E25;
+    --papel:#152229;
+    --tinta:#E7EEF2;
+    --tinta-2:#C3D2DA;
+    --mudo:#8399A5;
+    --filete:#26383F;
+    --filete-2:#1E2E35;
+    --azul:#7DB2E4;
+    --azul-forte:#A2CBEF;
+    --azul-suave:#5C8FBF;
+    --azul-lavado:#1A2B37;
+    --trilho:#233640;
+    --p1:#E8877D;  --p1-fundo:#33201E;
+    --p2:#DFA855;  --p2-fundo:#332818;
+    --p3:#68C0A6;  --p3-fundo:#152E28;
+    --p4:#8399A5;  --p4-fundo:#1C2B33;
+    --sobre-azul:#0B141A;
+    --sombra:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --sombra-alta:0 2px 4px rgba(0,0,0,.45), 0 24px 48px -20px rgba(0,0,0,.7);
+    --brilho-a:rgba(125,178,228,.13);
+    --brilho-b:rgba(92,143,191,.14);
+  }
+}
+:root[data-theme="dark"]{
+  --chao:#0D171D;
+  --chao-2:#111E25;
+  --papel:#152229;
+  --tinta:#E7EEF2;
+  --tinta-2:#C3D2DA;
+  --mudo:#8399A5;
+  --filete:#26383F;
+  --filete-2:#1E2E35;
+  --azul:#7DB2E4;
+  --azul-forte:#A2CBEF;
+  --azul-suave:#5C8FBF;
+  --azul-lavado:#1A2B37;
+  --trilho:#233640;
+  --p1:#E8877D;  --p1-fundo:#33201E;
+  --p2:#DFA855;  --p2-fundo:#332818;
+  --p3:#68C0A6;  --p3-fundo:#152E28;
+  --p4:#8399A5;  --p4-fundo:#1C2B33;
+  --sobre-azul:#0B141A;
+  --sombra:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --sombra-alta:0 2px 4px rgba(0,0,0,.45), 0 24px 48px -20px rgba(0,0,0,.7);
+  --brilho-a:rgba(125,178,228,.13);
+  --brilho-b:rgba(92,143,191,.14);
+}
+
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--chao);color:var(--tinta);
+  font-family:var(--b);font-size:16px;font-weight:300;line-height:1.66;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--d);margin:0;text-wrap:balance;letter-spacing:-.012em;line-height:1.12;font-weight:600}
+/* texto pequeno volta ao Regular: Light abaixo de 15px fica ralo na tela */
+.rec p,.passo p,.pg p,.orc-l p,.unico p,.item p,.tl .de,.col-c li,.pub p,
+.ch-loc,.inst-cab p,.menu a,.cartao > span > span,.rodape p{font-weight:400}
+p{margin:0}
+::selection{background:var(--azul-suave);color:var(--tinta)}
+:focus-visible{outline:2.5px solid var(--azul);outline-offset:3px;border-radius:3px}
+
+.env{width:min(1160px,calc(100% - 40px));margin-inline:auto}
+
+/* ---------- barra de navegação ---------- */
+.topo{
+  position:sticky;top:0;z-index:50;
+  background:var(--chao);
+  background:color-mix(in srgb,var(--chao) 88%,transparent);
+  backdrop-filter:saturate(160%) blur(12px);
+  -webkit-backdrop-filter:saturate(160%) blur(12px);
+  border-bottom:1px solid var(--filete-2);
+}
+.topo .env{display:flex;align-items:center;gap:28px;height:84px}
+.marca{display:flex;align-items:center;flex:none}
+.marca img{height:42px;width:auto}
+.escuro{display:none}
+:root[data-theme="dark"] .claro{display:none}
+:root[data-theme="dark"] .escuro{display:block}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .claro{display:none}
+  :root:not([data-theme="light"]) .escuro{display:block}
+}
+.menu{display:flex;gap:26px;margin-left:auto;font-size:14.5px;font-weight:500}
+.menu a{color:var(--tinta-2);text-decoration:none;padding:6px 0;border-bottom:1.5px solid transparent;transition:color .18s,border-color .18s}
+.menu a:hover{color:var(--azul);border-color:var(--azul)}
+@media (max-width:920px){.menu{display:none}.topo .env{gap:16px;height:72px}.marca img{height:34px}}
+
+/* ---------- botões ---------- */
+.bt{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--b);font-weight:600;font-size:15px;line-height:1;
+  padding:13px 20px;border-radius:8px;border:1.5px solid transparent;
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:transform .16s,box-shadow .16s,background .16s,border-color .16s,color .16s;
+}
+.bt svg{width:17px;height:17px;flex:none}
+.bt-1{background:var(--azul);color:var(--sobre-azul);box-shadow:0 1px 2px rgba(22,36,44,.16), 0 10px 22px -12px var(--azul)}
+.bt-1:hover{background:var(--azul-forte);transform:translateY(-1px)}
+.bt-2{background:transparent;color:var(--tinta);border-color:var(--filete)}
+.bt-2:hover{border-color:var(--azul);color:var(--azul);transform:translateY(-1px)}
+.bt-p{padding:10px 16px;font-size:14px}
+@media (max-width:560px){.bt{width:100%;justify-content:center}}
+@media (max-width:560px){.topo .bt{width:auto;padding:9px 13px;font-size:13.5px}}
+
+/* ---------- herói ---------- */
+.heroi{position:relative;padding:60px 0 74px;overflow:hidden}
+.heroi::before,.heroi::after{
+  content:"";position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(70px);
+}
+.heroi::before{width:660px;height:660px;top:-300px;left:-180px;background:var(--brilho-a);animation:vaga 26s ease-in-out infinite alternate}
+.heroi::after{width:520px;height:520px;top:60px;right:-220px;background:var(--brilho-b);animation:vaga 32s ease-in-out infinite alternate-reverse}
+@keyframes vaga{from{transform:translate3d(0,0,0)}to{transform:translate3d(40px,50px,0)}}
+@media (prefers-reduced-motion:reduce){.heroi::before,.heroi::after{animation:none}}
+.heroi .env{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:52px;align-items:center}
+@media (max-width:1000px){.heroi .env{grid-template-columns:1fr;gap:40px;align-items:start}.heroi{padding:44px 0 56px}}
+
+h1{font-size:clamp(35px,4.7vw,54px);letter-spacing:-.024em;line-height:1.06;font-weight:600}
+h1 em{font-style:normal;color:var(--azul)}
+.lead{font-size:18px;font-weight:300;color:var(--tinta-2);margin-top:22px;max-width:34em}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* ---------- painel: derivação do prazo (estático) ---------- */
+.inst{
+  background:var(--papel);border:1px solid var(--filete);border-radius:14px;
+  box-shadow:var(--sombra-alta);overflow:hidden;
+}
+.inst-cab{padding:18px 22px 16px;border-bottom:1px solid var(--filete-2)}
+.inst-cab h2{font-size:19px;letter-spacing:-.015em}
+.inst-cab p{font-size:14px;color:var(--mudo);margin-top:5px;max-width:52em}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;padding:20px 22px}
+.campo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.campo > span{font-family:var(--m);font-weight:500;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mudo)}
+.campo > b{
+  font-size:14.5px;font-weight:500;color:var(--tinta);
+  background:var(--chao);border:1px solid var(--filete);border-radius:7px;
+  padding:9px 12px;min-height:40px;display:flex;align-items:center;
+}
+@media (max-width:520px){.campos{grid-template-columns:1fr}}
+
+.saida{
+  display:grid;grid-template-columns:1fr 1fr auto;gap:2px;
+  background:var(--filete-2);border-block:1px solid var(--filete-2);
+}
+.saida > div{background:var(--papel);padding:15px 22px}
+.saida span{display:block;font-family:var(--m);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mudo);margin-bottom:5px}
+.saida strong{font-family:var(--d);font-size:28px;font-weight:600;letter-spacing:-.015em;font-variant-numeric:tabular-nums;line-height:1;display:block}
+.saida strong small{font-size:15px;font-weight:600;color:var(--mudo);margin-left:3px}
+.faixa{
+  font-family:var(--d);font-size:19px;font-weight:600;font-style:normal;letter-spacing:.03em;
+  padding:6px 14px;border-radius:7px;display:inline-block;line-height:1.2;
+}
+.f-P1{color:var(--p1);background:var(--p1-fundo)}
+.f-P2{color:var(--p2);background:var(--p2-fundo)}
+.f-P3{color:var(--p3);background:var(--p3-fundo)}
+.f-P4{color:var(--p4);background:var(--p4-fundo)}
+@media (max-width:520px){.saida{grid-template-columns:1fr 1fr}.saida > div:last-child{grid-column:1/-1}}
+
+.conta{
+  font-family:var(--m);font-weight:500;font-size:12.5px;color:var(--mudo);line-height:1.7;
+  padding:12px 22px;background:var(--chao-2);border-bottom:1px solid var(--filete-2);
+}
+.conta b{color:var(--tinta-2);font-weight:500}
+
+.chamado{padding:17px 22px 20px}
+.ch-linha{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:3px}
+.ch-num{font-family:var(--m);font-weight:500;font-size:12.5px;color:var(--azul);font-weight:500}
+.ch-tit{font-family:var(--d);font-weight:600;font-size:15.5px;letter-spacing:-.01em}
+.ch-loc{font-size:13.5px;color:var(--mudo)}
+.medidor{height:7px;border-radius:99px;background:var(--trilho);overflow:hidden;margin:13px 0 8px}
+.medidor i{display:block;height:100%;border-radius:99px;background:var(--azul)}
+.ch-pe{display:flex;justify-content:space-between;gap:14px;font-family:var(--m);font-weight:500;font-size:12px;color:var(--mudo);flex-wrap:wrap}
+.ch-pe b{color:var(--tinta-2);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ---------- seções ---------- */
+section{padding:74px 0}
+.corte{border-top:1px solid var(--filete-2)}
+.tit{font-size:clamp(25px,3.1vw,35px);letter-spacing:-.018em;max-width:20ch}
+.sub{font-size:17px;font-weight:300;color:var(--tinta-2);margin-top:14px;max-width:62ch}
+.sub b{font-weight:600;color:var(--tinta)}
+.cab-2{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:end;margin-bottom:44px}
+.cab-1{margin-bottom:40px}
+.cab-1 .tit{max-width:26ch}
+@media (max-width:860px){.cab-2{grid-template-columns:1fr;gap:16px;align-items:start;margin-bottom:34px}section{padding:56px 0}}
+
+/* ---------- contraste antes / depois ---------- */
+.contraste{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--filete);border-radius:14px;overflow:hidden;background:var(--papel)}
+.col-c{padding:26px 28px 30px}
+.col-c + .col-c{border-left:1px solid var(--filete-2)}
+.col-c h3{font-size:16px;font-family:var(--m);font-weight:500;font-weight:500;letter-spacing:.11em;text-transform:uppercase;margin-bottom:20px}
+.col-c.antes{background:var(--chao-2)}
+.col-c.antes h3{color:var(--mudo)}
+.col-c.dep h3{color:var(--azul)}
+.col-c ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:15px}
+.col-c li{display:grid;grid-template-columns:16px 1fr;gap:11px;font-size:15.5px;line-height:1.5}
+.col-c li::before{content:"";width:9px;height:9px;margin-top:8px;border-radius:2px;background:var(--filete);transform:rotate(45deg)}
+.col-c.dep li::before{background:var(--azul)}
+.col-c.antes li{color:var(--mudo)}
+@media (max-width:760px){.contraste{grid-template-columns:1fr}.col-c + .col-c{border-left:0;border-top:1px solid var(--filete-2)}}
+
+/* ---------- fluxo numerado (é sequência de verdade) ---------- */
+.fluxo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--tinta);margin-top:6px}
+.passo{padding:24px 22px 26px 0;border-right:1px solid var(--filete-2)}
+.passo:last-child{border-right:0;padding-right:0}
+.passo:not(:first-child){padding-left:22px}
+.passo .n{font-family:var(--m);font-weight:500;font-size:12px;color:var(--azul);letter-spacing:.1em;display:block;margin-bottom:12px}
+.passo h3{font-size:19px;margin-bottom:9px}
+.passo p{font-size:14.8px;color:var(--tinta-2);line-height:1.55}
+.passo p b{font-weight:600;color:var(--tinta)}
+@media (max-width:900px){.fluxo{grid-template-columns:1fr 1fr}.passo{border-bottom:1px solid var(--filete-2)}.passo:nth-child(2){border-right:0}.passo:nth-child(3){padding-left:0}.passo:nth-child(n+3){border-bottom:0}}
+@media (max-width:560px){.fluxo{grid-template-columns:1fr}.passo{border-right:0;padding-left:0!important;padding-right:0;border-bottom:1px solid var(--filete-2)}.passo:last-child{border-bottom:0}}
+
+/* ---------- recursos ---------- */
+.recursos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--filete-2);border:1px solid var(--filete-2);border-radius:14px;overflow:hidden}
+.rec{background:var(--papel);padding:24px 24px 26px;display:flex;flex-direction:column;gap:9px}
+.rec .et{font-family:var(--m);font-weight:500;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--azul)}
+.rec h3{font-size:17px;letter-spacing:-.012em}
+.rec p{font-size:14.8px;color:var(--tinta-2);line-height:1.55}
+@media (max-width:900px){.recursos{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.recursos{grid-template-columns:1fr}}
+
+/* ---------- painel de indicadores ---------- */
+.painel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:26px;align-items:start}
+.pilha{display:flex;flex-direction:column;gap:26px}
+@media (max-width:900px){.painel{grid-template-columns:1fr}}
+.quadro{background:var(--papel);border:1px solid var(--filete);border-radius:14px;box-shadow:var(--sombra);overflow:hidden}
+.quadro-cab{padding:15px 20px;border-bottom:1px solid var(--filete-2);display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.quadro-cab h3{font-size:15.5px}
+.quadro-cab span{font-family:var(--m);font-weight:500;font-size:11px;color:var(--mudo);white-space:nowrap}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--filete-2)}
+.kpi{background:var(--papel);padding:18px 20px}
+.kpi span{display:block;font-family:var(--m);font-weight:500;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mudo);margin-bottom:6px}
+.kpi strong{font-family:var(--d);font-size:26px;font-weight:600;letter-spacing:-.015em;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+.kpi strong small{font-size:14px;font-weight:600;color:var(--mudo);margin-left:2px}
+.kpi em{font-style:normal;font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--p3);display:block;margin-top:4px}
+.kpi em.baixo{color:var(--p1)}
+
+.barras{padding:18px 20px 20px;display:flex;flex-direction:column;gap:13px}
+.barra{display:grid;grid-template-columns:120px minmax(0,1fr) 42px;gap:12px;align-items:center;font-size:14px}
+.barra .r{color:var(--tinta-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra .t{height:14px;background:var(--chao-2);border-radius:3px;overflow:hidden}
+.barra .t i{display:block;height:100%;background:var(--azul);border-radius:3px}
+.barra .t i.b2{background:var(--azul-suave)}
+.barra .v{font-family:var(--m);font-weight:500;font-size:13px;color:var(--tinta);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.barra{grid-template-columns:92px minmax(0,1fr) 36px;font-size:13px}}
+.legenda{font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--mudo);padding:0 20px 16px;line-height:1.5}
+
+/* telefone do técnico */
+.fone{
+  border:1px solid var(--filete);border-radius:20px;background:var(--papel);
+  box-shadow:var(--sombra);padding:8px;max-width:330px;margin-inline:auto;
+}
+.fone-nota{font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--mudo);text-align:center;margin-top:12px;line-height:1.5}
+.fone-in{border:1px solid var(--filete-2);border-radius:14px;overflow:hidden}
+.fone-cab{background:var(--tinta);color:var(--chao);padding:11px 14px;display:flex;justify-content:space-between;align-items:center}
+:root[data-theme="dark"] .fone-cab{background:var(--chao-2);color:var(--tinta)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fone-cab{background:var(--chao-2);color:var(--tinta)}}
+.fone-cab b{font-family:var(--d);font-size:13.5px;font-weight:600}
+.fone-cab span{font-family:var(--m);font-weight:500;font-size:10.5px;opacity:.72}
+.fila{display:flex;flex-direction:column}
+.item{padding:12px 14px;border-bottom:1px solid var(--filete-2);display:flex;flex-direction:column;gap:5px}
+.item:last-child{border-bottom:0}
+.item .l1{display:flex;align-items:center;gap:8px}
+.pin{font-family:var(--m);font-weight:500;font-size:10.5px;font-weight:500;padding:2px 6px;border-radius:4px}
+.item .l1 b{font-family:var(--m);font-weight:500;font-size:11px;color:var(--mudo);font-weight:400;margin-left:auto}
+.item p{font-size:13.5px;line-height:1.4;color:var(--tinta-2)}
+.item .med{height:4px;border-radius:99px;background:var(--trilho);overflow:hidden}
+.item .med i{display:block;height:100%;border-radius:99px}
+
+/* ---------- para quem ---------- */
+.publico{border-top:1px solid var(--filete)}
+.pub{
+  display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:28px;
+  padding:24px 0;border-bottom:1px solid var(--filete-2);align-items:start;
+}
+.pub .et{font-family:var(--m);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);padding-top:5px}
+.pub h3{font-size:19.5px;margin-bottom:7px}
+.pub p{font-size:15.8px;color:var(--tinta-2);max-width:62ch}
+.pub p b{font-weight:600;color:var(--tinta)}
+@media (max-width:700px){.pub{grid-template-columns:1fr;gap:8px}.pub .et{padding-top:0}}
+
+/* ---------- preço ---------- */
+.preco{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px;align-items:start}
+@media (max-width:900px){.preco{grid-template-columns:1fr;gap:30px}}
+.tabela{display:flex;flex-direction:column}
+.tl{
+  display:grid;grid-template-columns:minmax(0,108px) minmax(0,1fr) auto;gap:16px;
+  align-items:center;padding:14px 20px;border-bottom:1px solid var(--filete-2);
+}
+.tl:last-child{border-bottom:0}
+.tl.th{background:var(--chao-2);padding-block:9px}
+.tl.th span{font-family:var(--m);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mudo)}
+.tl.th span:last-child{text-align:right}
+.tl .fx{font-family:var(--m);font-weight:500;font-size:12.5px;color:var(--azul)}
+.tl .de{font-size:15px;color:var(--tinta-2)}
+.tl .vl{text-align:right;white-space:nowrap}
+.tl .vl b{font-family:var(--d);font-size:19px;font-weight:600;letter-spacing:-.015em;font-variant-numeric:tabular-nums;display:block;line-height:1.15}
+.tl .vl b.sc{font-family:var(--b);font-size:15px;font-weight:600;color:var(--mudo);letter-spacing:0}
+.tl .vl em{font-style:normal;font-family:var(--m);font-weight:500;font-size:11px;color:var(--p3);display:block;margin-top:2px}
+@media (max-width:440px){.tl{grid-template-columns:1fr auto;gap:4px 12px}.tl .fx{grid-column:1/-1}.tl.th{display:none}}
+
+.soma{display:flex;flex-direction:column;gap:22px}
+.mais{
+  align-self:center;width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;position:relative;z-index:2;margin-block:-31px;
+  background:var(--papel);border:1px solid var(--filete);box-shadow:var(--sombra);
+  font-family:var(--d);font-weight:600;font-size:21px;line-height:1;color:var(--azul);
+}
+.unico{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px}
+.unico strong{font-family:var(--d);font-size:clamp(29px,3.4vw,36px);font-weight:600;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.unico p{font-size:14.8px;color:var(--tinta-2);line-height:1.55}
+.unico p b{font-weight:600;color:var(--tinta)}
+.orc-l{padding:18px 20px;border-bottom:1px solid var(--filete-2);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline}
+.orc-l:last-child{border-bottom:0}
+.orc-l .n{font-family:var(--m);font-weight:500;font-size:11px;color:var(--azul);letter-spacing:.1em;white-space:nowrap}
+.orc-l h3{font-size:16px;margin-bottom:5px}
+.orc-l p{font-size:14.8px;color:var(--tinta-2);line-height:1.55}
+.orc-l.fora{background:var(--chao-2)}
+.orc-l.fora .n{color:var(--p3)}
+.rodape-preco{font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--mudo);line-height:1.6;padding:0 2px}
+
+/* ---------- perguntas ---------- */
+.perguntas{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--filete-2);border-block:1px solid var(--filete-2)}
+.pg{background:var(--chao);padding:24px 26px 26px}
+.pg h3{font-size:16.5px;margin-bottom:9px;letter-spacing:-.012em}
+.pg p{font-size:15px;color:var(--tinta-2);line-height:1.58}
+@media (max-width:760px){.perguntas{grid-template-columns:1fr}}
+
+/* ---------- contato ---------- */
+.contato{background:var(--papel);border-block:1px solid var(--filete);padding:0}
+.contato .env{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:52px;align-items:center;padding:70px 0}
+@media (max-width:860px){.contato .env{grid-template-columns:1fr;gap:32px;padding:52px 0}}
+.cartoes{display:flex;flex-direction:column;gap:12px}
+.cartao{
+  display:flex;align-items:center;gap:16px;text-decoration:none;
+  border:1.5px solid var(--filete);border-radius:12px;padding:17px 20px;background:var(--chao);
+  transition:border-color .18s,transform .18s,box-shadow .18s;
+}
+.cartao:hover{border-color:var(--azul);transform:translateY(-2px);box-shadow:var(--sombra)}
+.cartao .ic{width:42px;height:42px;border-radius:10px;background:var(--azul-lavado);color:var(--azul);display:grid;place-items:center;flex:none}
+.cartao .ic svg{width:21px;height:21px}
+.cartao b{font-family:var(--d);font-size:16px;font-weight:600;display:block}
+.cartao > span > span{font-family:var(--m);font-weight:500;font-size:13px;color:var(--mudo);display:block;margin-top:2px;word-break:break-all}
+
+/* ---------- rodapé ---------- */
+.rodape{padding:46px 0 52px}
+.rodape .env{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.rodape img{height:46px;width:auto}
+.rodape p{font-size:13.5px;color:var(--mudo)}
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="env">
+    <a class="marca" href="#topo" aria-label="Seriema">
+      <img class="claro" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20274.9%2076%22%20role%3D%22img%22%20aria-label%3D%22Seriema%22%3E%3Cg%20transform%3D%22translate%28-10%20-10%29%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22sc9%22%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%20fill%3D%22%233E7BBA%22%2F%3E%3Cg%20clip-path%3D%22url%28%23sc9%29%22%3E%3Cpath%20d%3D%22M43%2055%20C41%2064%2040%2074%2041%2090%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M39%2050%20C39%2039%2045%2034%2054%2034%20C61%2034%2065%2037%2066%2042%20L79%2047%20L65%2051%20C63%2056%2056%2057%2049%2056%20C42%2055%2039%2055%2039%2050%20Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M51%2033%20C49%2026%2050%2022%2054%2019%22%20fill%3D%22none%22%20stroke%3D%22%2388BDD8%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M57%2032%20C57%2025%2060%2021%2065%2019%22%20fill%3D%22none%22%20stroke%3D%22%2388BDD8%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2242%22%20r%3D%222.6%22%20fill%3D%22%233E7BBA%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M108.47%200.18Q105.61%200.18%20103.13%20-0.66Q100.64%20-1.5%2099.28%20-2.77L100.29%20-4.53Q101.61%20-3.39%20103.81%20-2.57Q106.01%20-1.76%20108.56%20-1.76Q112.17%20-1.76%20113.75%20-2.95Q115.34%20-4.14%20115.34%20-6.07Q115.34%20-7.48%20114.52%20-8.29Q113.71%20-9.11%20112.34%20-9.55Q110.98%20-9.99%20109.35%20-10.27Q107.72%20-10.56%20106.1%20-10.91Q104.47%20-11.26%20103.1%20-11.92Q101.74%20-12.58%20100.93%20-13.75Q100.11%20-14.92%20100.11%20-16.85Q100.11%20-18.61%20101.08%20-20.02Q102.05%20-21.43%20103.98%20-22.29Q105.92%20-23.14%20108.82%20-23.14Q110.98%20-23.14%20113.16%20-22.53Q115.34%20-21.91%20116.7%20-20.9L115.69%20-19.14Q114.24%20-20.24%20112.43%20-20.72Q110.63%20-21.21%20108.78%20-21.21Q105.44%20-21.21%20103.87%20-19.98Q102.31%20-18.74%20102.31%20-16.9Q102.31%20-15.44%20103.13%20-14.59Q103.94%20-13.73%20105.3%20-13.27Q106.67%20-12.8%20108.3%20-12.52Q109.92%20-12.23%20111.55%20-11.88Q113.18%20-11.53%20114.54%20-10.89Q115.91%20-10.25%20116.72%20-9.13Q117.54%20-8.01%20117.54%20-6.12Q117.54%20-4.22%20116.5%20-2.82Q115.47%20-1.41%20113.44%20-0.62Q111.42%200.18%20108.47%200.18ZM133.02%200.18Q129.55%200.18%20126.89%20-1.32Q124.22%20-2.82%20122.71%20-5.46Q121.19%20-8.1%20121.19%20-11.48Q121.19%20-14.92%20122.62%20-17.53Q124.05%20-20.15%20126.56%20-21.65Q129.06%20-23.14%20132.19%20-23.14Q135.31%20-23.14%20137.8%20-21.69Q140.28%20-20.24%20141.71%20-17.62Q143.14%20-15%20143.14%20-11.57Q143.14%20-11.44%20143.12%20-11.29Q143.1%20-11.13%20143.1%20-10.96H122.82V-12.67H141.91L141.03%20-11.84Q141.08%20-14.52%20139.91%20-16.65Q138.74%20-18.79%20136.76%20-20Q134.78%20-21.21%20132.19%20-21.21Q129.64%20-21.21%20127.63%20-20Q125.63%20-18.79%20124.49%20-16.65Q123.34%20-14.52%20123.34%20-11.79V-11.4Q123.34%20-8.58%20124.6%20-6.4Q125.85%20-4.22%20128.05%20-3.01Q130.25%20-1.8%20133.07%20-1.8Q135.27%20-1.8%20137.18%20-2.6Q139.1%20-3.39%20140.42%20-5.02L141.69%20-3.56Q140.2%20-1.72%20137.93%20-0.77Q135.66%200.18%20133.02%200.18ZM149.96%200V-22.97H152.08V-16.68L151.86%20-17.38Q152.82%20-20.15%20155.11%20-21.65Q157.4%20-23.14%20160.83%20-23.14V-20.99Q160.7%20-20.99%20160.57%20-21.01Q160.44%20-21.03%20160.3%20-21.03Q156.48%20-21.03%20154.32%20-18.63Q152.16%20-16.24%20152.16%20-11.97V0ZM167.3%200V-22.97H169.5V0ZM168.4%20-28.56Q167.65%20-28.56%20167.12%20-29.08Q166.6%20-29.61%20166.6%20-30.32Q166.6%20-31.06%20167.12%20-31.59Q167.65%20-32.12%20168.4%20-32.12Q169.19%20-32.12%20169.7%20-31.61Q170.2%20-31.11%20170.2%20-30.36Q170.2%20-29.61%20169.7%20-29.08Q169.19%20-28.56%20168.4%20-28.56ZM188.11%200.18Q184.64%200.18%20181.97%20-1.32Q179.31%20-2.82%20177.79%20-5.46Q176.28%20-8.1%20176.28%20-11.48Q176.28%20-14.92%20177.71%20-17.53Q179.14%20-20.15%20181.64%20-21.65Q184.15%20-23.14%20187.28%20-23.14Q190.4%20-23.14%20192.89%20-21.69Q195.37%20-20.24%20196.8%20-17.62Q198.23%20-15%20198.23%20-11.57Q198.23%20-11.44%20198.21%20-11.29Q198.19%20-11.13%20198.19%20-10.96H177.9V-12.67H197L196.12%20-11.84Q196.16%20-14.52%20195%20-16.65Q193.83%20-18.79%20191.85%20-20Q189.87%20-21.21%20187.28%20-21.21Q184.72%20-21.21%20182.72%20-20Q180.72%20-18.79%20179.58%20-16.65Q178.43%20-14.52%20178.43%20-11.79V-11.4Q178.43%20-8.58%20179.69%20-6.4Q180.94%20-4.22%20183.14%20-3.01Q185.34%20-1.8%20188.16%20-1.8Q190.36%20-1.8%20192.27%20-2.6Q194.18%20-3.39%20195.5%20-5.02L196.78%20-3.56Q195.28%20-1.72%20193.02%20-0.77Q190.75%200.18%20188.11%200.18ZM205.05%200V-22.97H207.16V-16.63L206.86%20-17.34Q207.87%20-20.02%20210.24%20-21.58Q212.62%20-23.14%20215.96%20-23.14Q219.4%20-23.14%20221.75%20-21.41Q224.1%20-19.67%20224.72%20-16.24L223.97%20-16.54Q224.9%20-19.49%20227.45%20-21.32Q230%20-23.14%20233.65%20-23.14Q236.42%20-23.14%20238.47%20-22.07Q240.52%20-20.99%20241.66%20-18.81Q242.8%20-16.63%20242.8%20-13.42V0H240.6V-13.24Q240.6%20-17.12%20238.71%20-19.14Q236.82%20-21.16%20233.43%20-21.16Q230.84%20-21.16%20228.94%20-20.06Q227.05%20-18.96%20226.04%20-16.98Q225.03%20-15%20225.03%20-12.23V0H222.83V-13.24Q222.83%20-17.12%20220.94%20-19.14Q219.04%20-21.16%20215.66%20-21.16Q213.06%20-21.16%20211.17%20-20.06Q209.28%20-18.96%20208.26%20-16.98Q207.25%20-15%20207.25%20-12.23V0ZM266.34%200V-5.24L266.26%20-6.03V-14.65Q266.26%20-17.86%20264.52%20-19.54Q262.78%20-21.21%20259.44%20-21.21Q257.06%20-21.21%20255.01%20-20.39Q252.97%20-19.58%20251.52%20-18.3L250.42%20-19.89Q252.13%20-21.43%20254.55%20-22.29Q256.97%20-23.14%20259.61%20-23.14Q263.88%20-23.14%20266.17%20-20.99Q268.46%20-18.83%20268.46%20-14.56V0ZM258.07%200.18Q255.52%200.18%20253.65%20-0.64Q251.78%20-1.45%20250.79%20-2.95Q249.8%20-4.44%20249.8%20-6.38Q249.8%20-8.14%20250.61%20-9.57Q251.43%20-11%20253.32%20-11.9Q255.21%20-12.8%20258.38%20-12.8H266.83V-11.09H258.42Q254.86%20-11.09%20253.43%20-9.77Q252%20-8.45%20252%20-6.47Q252%20-4.27%20253.67%20-2.95Q255.34%20-1.63%20258.38%20-1.63Q261.28%20-1.63%20263.29%20-2.95Q265.29%20-4.27%20266.26%20-6.78L266.87%20-5.28Q265.95%20-2.77%20263.73%20-1.3Q261.5%200.18%20258.07%200.18Z%22%20fill%3D%22%2316242C%22%20transform%3D%22translate%280%2053.97%29%22%2F%3E%3C%2Fsvg%3E" alt="Seriema" width="275" height="76">
+      <img class="escuro" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20274.9%2076%22%20role%3D%22img%22%20aria-label%3D%22Seriema%22%3E%3Cg%20transform%3D%22translate%28-10%20-10%29%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22sc10%22%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%20fill%3D%22%236FA5DC%22%2F%3E%3Cg%20clip-path%3D%22url%28%23sc10%29%22%3E%3Cpath%20d%3D%22M43%2055%20C41%2064%2040%2074%2041%2090%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M39%2050%20C39%2039%2045%2034%2054%2034%20C61%2034%2065%2037%2066%2042%20L79%2047%20L65%2051%20C63%2056%2056%2057%2049%2056%20C42%2055%2039%2055%2039%2050%20Z%22%20fill%3D%22%23101A21%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M51%2033%20C49%2026%2050%2022%2054%2019%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M57%2032%20C57%2025%2060%2021%2065%2019%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2242%22%20r%3D%222.6%22%20fill%3D%22%236FA5DC%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M108.47%200.18Q105.61%200.18%20103.13%20-0.66Q100.64%20-1.5%2099.28%20-2.77L100.29%20-4.53Q101.61%20-3.39%20103.81%20-2.57Q106.01%20-1.76%20108.56%20-1.76Q112.17%20-1.76%20113.75%20-2.95Q115.34%20-4.14%20115.34%20-6.07Q115.34%20-7.48%20114.52%20-8.29Q113.71%20-9.11%20112.34%20-9.55Q110.98%20-9.99%20109.35%20-10.27Q107.72%20-10.56%20106.1%20-10.91Q104.47%20-11.26%20103.1%20-11.92Q101.74%20-12.58%20100.93%20-13.75Q100.11%20-14.92%20100.11%20-16.85Q100.11%20-18.61%20101.08%20-20.02Q102.05%20-21.43%20103.98%20-22.29Q105.92%20-23.14%20108.82%20-23.14Q110.98%20-23.14%20113.16%20-22.53Q115.34%20-21.91%20116.7%20-20.9L115.69%20-19.14Q114.24%20-20.24%20112.43%20-20.72Q110.63%20-21.21%20108.78%20-21.21Q105.44%20-21.21%20103.87%20-19.98Q102.31%20-18.74%20102.31%20-16.9Q102.31%20-15.44%20103.13%20-14.59Q103.94%20-13.73%20105.3%20-13.27Q106.67%20-12.8%20108.3%20-12.52Q109.92%20-12.23%20111.55%20-11.88Q113.18%20-11.53%20114.54%20-10.89Q115.91%20-10.25%20116.72%20-9.13Q117.54%20-8.01%20117.54%20-6.12Q117.54%20-4.22%20116.5%20-2.82Q115.47%20-1.41%20113.44%20-0.62Q111.42%200.18%20108.47%200.18ZM133.02%200.18Q129.55%200.18%20126.89%20-1.32Q124.22%20-2.82%20122.71%20-5.46Q121.19%20-8.1%20121.19%20-11.48Q121.19%20-14.92%20122.62%20-17.53Q124.05%20-20.15%20126.56%20-21.65Q129.06%20-23.14%20132.19%20-23.14Q135.31%20-23.14%20137.8%20-21.69Q140.28%20-20.24%20141.71%20-17.62Q143.14%20-15%20143.14%20-11.57Q143.14%20-11.44%20143.12%20-11.29Q143.1%20-11.13%20143.1%20-10.96H122.82V-12.67H141.91L141.03%20-11.84Q141.08%20-14.52%20139.91%20-16.65Q138.74%20-18.79%20136.76%20-20Q134.78%20-21.21%20132.19%20-21.21Q129.64%20-21.21%20127.63%20-20Q125.63%20-18.79%20124.49%20-16.65Q123.34%20-14.52%20123.34%20-11.79V-11.4Q123.34%20-8.58%20124.6%20-6.4Q125.85%20-4.22%20128.05%20-3.01Q130.25%20-1.8%20133.07%20-1.8Q135.27%20-1.8%20137.18%20-2.6Q139.1%20-3.39%20140.42%20-5.02L141.69%20-3.56Q140.2%20-1.72%20137.93%20-0.77Q135.66%200.18%20133.02%200.18ZM149.96%200V-22.97H152.08V-16.68L151.86%20-17.38Q152.82%20-20.15%20155.11%20-21.65Q157.4%20-23.14%20160.83%20-23.14V-20.99Q160.7%20-20.99%20160.57%20-21.01Q160.44%20-21.03%20160.3%20-21.03Q156.48%20-21.03%20154.32%20-18.63Q152.16%20-16.24%20152.16%20-11.97V0ZM167.3%200V-22.97H169.5V0ZM168.4%20-28.56Q167.65%20-28.56%20167.12%20-29.08Q166.6%20-29.61%20166.6%20-30.32Q166.6%20-31.06%20167.12%20-31.59Q167.65%20-32.12%20168.4%20-32.12Q169.19%20-32.12%20169.7%20-31.61Q170.2%20-31.11%20170.2%20-30.36Q170.2%20-29.61%20169.7%20-29.08Q169.19%20-28.56%20168.4%20-28.56ZM188.11%200.18Q184.64%200.18%20181.97%20-1.32Q179.31%20-2.82%20177.79%20-5.46Q176.28%20-8.1%20176.28%20-11.48Q176.28%20-14.92%20177.71%20-17.53Q179.14%20-20.15%20181.64%20-21.65Q184.15%20-23.14%20187.28%20-23.14Q190.4%20-23.14%20192.89%20-21.69Q195.37%20-20.24%20196.8%20-17.62Q198.23%20-15%20198.23%20-11.57Q198.23%20-11.44%20198.21%20-11.29Q198.19%20-11.13%20198.19%20-10.96H177.9V-12.67H197L196.12%20-11.84Q196.16%20-14.52%20195%20-16.65Q193.83%20-18.79%20191.85%20-20Q189.87%20-21.21%20187.28%20-21.21Q184.72%20-21.21%20182.72%20-20Q180.72%20-18.79%20179.58%20-16.65Q178.43%20-14.52%20178.43%20-11.79V-11.4Q178.43%20-8.58%20179.69%20-6.4Q180.94%20-4.22%20183.14%20-3.01Q185.34%20-1.8%20188.16%20-1.8Q190.36%20-1.8%20192.27%20-2.6Q194.18%20-3.39%20195.5%20-5.02L196.78%20-3.56Q195.28%20-1.72%20193.02%20-0.77Q190.75%200.18%20188.11%200.18ZM205.05%200V-22.97H207.16V-16.63L206.86%20-17.34Q207.87%20-20.02%20210.24%20-21.58Q212.62%20-23.14%20215.96%20-23.14Q219.4%20-23.14%20221.75%20-21.41Q224.1%20-19.67%20224.72%20-16.24L223.97%20-16.54Q224.9%20-19.49%20227.45%20-21.32Q230%20-23.14%20233.65%20-23.14Q236.42%20-23.14%20238.47%20-22.07Q240.52%20-20.99%20241.66%20-18.81Q242.8%20-16.63%20242.8%20-13.42V0H240.6V-13.24Q240.6%20-17.12%20238.71%20-19.14Q236.82%20-21.16%20233.43%20-21.16Q230.84%20-21.16%20228.94%20-20.06Q227.05%20-18.96%20226.04%20-16.98Q225.03%20-15%20225.03%20-12.23V0H222.83V-13.24Q222.83%20-17.12%20220.94%20-19.14Q219.04%20-21.16%20215.66%20-21.16Q213.06%20-21.16%20211.17%20-20.06Q209.28%20-18.96%20208.26%20-16.98Q207.25%20-15%20207.25%20-12.23V0ZM266.34%200V-5.24L266.26%20-6.03V-14.65Q266.26%20-17.86%20264.52%20-19.54Q262.78%20-21.21%20259.44%20-21.21Q257.06%20-21.21%20255.01%20-20.39Q252.97%20-19.58%20251.52%20-18.3L250.42%20-19.89Q252.13%20-21.43%20254.55%20-22.29Q256.97%20-23.14%20259.61%20-23.14Q263.88%20-23.14%20266.17%20-20.99Q268.46%20-18.83%20268.46%20-14.56V0ZM258.07%200.18Q255.52%200.18%20253.65%20-0.64Q251.78%20-1.45%20250.79%20-2.95Q249.8%20-4.44%20249.8%20-6.38Q249.8%20-8.14%20250.61%20-9.57Q251.43%20-11%20253.32%20-11.9Q255.21%20-12.8%20258.38%20-12.8H266.83V-11.09H258.42Q254.86%20-11.09%20253.43%20-9.77Q252%20-8.45%20252%20-6.47Q252%20-4.27%20253.67%20-2.95Q255.34%20-1.63%20258.38%20-1.63Q261.28%20-1.63%20263.29%20-2.95Q265.29%20-4.27%20266.26%20-6.78L266.87%20-5.28Q265.95%20-2.77%20263.73%20-1.3Q261.5%200.18%20258.07%200.18Z%22%20fill%3D%22%23E7EEF2%22%20transform%3D%22translate%280%2053.97%29%22%2F%3E%3C%2Fsvg%3E" alt="Seriema" width="275" height="76">
+    </a>
+    <nav class="menu">
+      <a href="#funciona">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#publico">Para quem</a>
+      <a href="#preco">Preço</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="bt bt-1 bt-p" href="https://wa.me/5511988346666?text=Ola%21%20Vim%20pelo%20site%20do%20Seriema%20e%20gostaria%20de%20conhecer%20o%20sistema%20de%20gestao%20de%20manutencao." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.98-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="topo">
+
+<!-- ======================= HERÓI ======================= -->
+<div class="heroi">
+  <div class="env">
+    <div>
+      <h1>O prazo do chamado <em>não é chute</em>.</h1>
+      <p class="lead">Categoria, sintoma, criticidade do ativo e tipo de parada definem sozinhos a prioridade e o SLA de cada chamado. Do pedido aberto no celular até o indicador de backlog — sem planilha no meio.</p>
+      <div class="acoes">
+        <a class="bt bt-1" href="https://wa.me/5511988346666?text=Ola%21%20Vim%20pelo%20site%20do%20Seriema%20e%20gostaria%20de%20conhecer%20o%20sistema%20de%20gestao%20de%20manutencao." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.98-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a class="bt bt-2" href="#preco">Ver os valores</a>
+      </div>
+    </div>
+
+    <div class="inst">
+      <div class="inst-cab">
+        <h2>Como o prazo é calculado</h2>
+        <p>O par categoria + sintoma traz o SLA do catálogo. A parada e a criticidade do ativo apenas encurtam esse prazo — ninguém digita horas na mão.</p>
+      </div>
+      <div class="campos">
+        <div class="campo"><span>Categoria</span><b>Elétrica</b></div>
+        <div class="campo"><span>Sintoma</span><b>Falta de fase</b></div>
+        <div class="campo"><span>Criticidade do ativo</span><b>B — parada afeta uma área</b></div>
+        <div class="campo"><span>Parada</span><b>Parcial — opera com restrição</b></div>
+      </div>
+      <div class="saida">
+        <div><span>SLA de atendimento</span><strong>1,2<small>h</small></strong></div>
+        <div><span>SLA de execução</span><strong>3,6<small>h</small></strong></div>
+        <div><span>Prioridade</span><em class="faixa f-P1">P1</em></div>
+      </div>
+      <p class="conta"><b>6 h de catálogo × 0,75 (parada parcial) × 0,80 (ativo B) = 3,6 h</b> · execução · faixa P1</p>
+      <div class="chamado">
+        <div class="ch-linha">
+          <span class="ch-num">OS-2026-0431</span>
+          <span class="ch-tit">Falta de fase</span>
+        </div>
+        <p class="ch-loc">Condomínio Alphaville / Bloco B / Casa de força · QGB-002</p>
+        <div class="medidor"><i style="width:22%"></i></div>
+        <div class="ch-pe">
+          <span>aberto há <b>00:47:12</b></span>
+          <span>restam <b>2,8 h</b> do prazo de execução</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= CONTRASTE ======================= -->
+<section class="corte">
+  <div class="env">
+    <div class="cab-2">
+      <h2 class="tit">Manutenção não se perde na oficina. Se perde na fila.</h2>
+      <p class="sub">O serviço quase sempre é feito. O que falta é o registro que prova o que foi feito, quando, por quem e dentro de qual prazo.</p>
+    </div>
+    <div class="contraste">
+      <div class="col-c antes">
+        <h3>Como costuma ser</h3>
+        <ul>
+          <li>O pedido chega por WhatsApp e some no meio da conversa.</li>
+          <li>A prioridade é de quem insiste mais.</li>
+          <li>Ninguém sabe quantas horas de serviço estão paradas na fila.</li>
+          <li>O relatório do mês é reconstruído de memória, na véspera da reunião.</li>
+          <li>A mesma falha volta três vezes e ninguém percebe que é a mesma.</li>
+        </ul>
+      </div>
+      <div class="col-c dep">
+        <h3>Como fica no Seriema</h3>
+        <ul>
+          <li>Todo pedido vira chamado numerado, com local, ativo, sintoma e foto.</li>
+          <li>A prioridade sai do catálogo — a mesma regra para todo mundo.</li>
+          <li>O backlog é a soma das horas de execução comprometidas, atualizada sozinha.</li>
+          <li>O relatório já existe: é a própria operação registrada.</li>
+          <li>A reincidência aparece por sintoma e por ativo, com nome e TAG.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FLUXO ======================= -->
+<section id="funciona" class="corte">
+  <div class="env">
+    <div class="cab-2">
+      <h2 class="tit">Do pedido à nota, com o prazo correndo desde o primeiro clique.</h2>
+      <p class="sub">Cada etapa tem um dono e um registro. Ninguém precisa lembrar de anotar depois.</p>
+    </div>
+    <div class="fluxo">
+      <div class="passo">
+        <span class="n">ETAPA 01</span>
+        <h3>Abrir</h3>
+        <p>Unidade, localização, ativo (opcional), categoria e sintoma, em cascata. Descrição obrigatória, foto ou vídeo anexados na hora. Quem abre não escolhe prioridade nem prazo — o sistema calcula.</p>
+      </div>
+      <div class="passo">
+        <span class="n">ETAPA 02</span>
+        <h3>Programar</h3>
+        <p>O PCM ou o gestor define responsável e data. Chamado aberto pelo próprio técnico já cai na fila dele, sem passar por ninguém.</p>
+      </div>
+      <div class="passo">
+        <span class="n">ETAPA 03</span>
+        <h3>Executar</h3>
+        <p>O técnico registra a solução, a causa, as horas gastas e as fotos do serviço. Se falta peça, o chamado vai para <b>Em espera</b> sem sumir do painel.</p>
+      </div>
+      <div class="passo">
+        <span class="n">ETAPA 04</span>
+        <h3>Avaliar</h3>
+        <p>O solicitante dá a nota de 0 a 10. Nota baixa reabre o chamado automaticamente e devolve para a fila — não fica por isso mesmo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RECURSOS ======================= -->
+<section id="recursos" class="corte">
+  <div class="env">
+    <div class="cab-2">
+      <h2 class="tit">Um sistema inteiro, não um formulário com nome bonito.</h2>
+      <p class="sub">Tudo abaixo já está no produto. Nada aqui depende de módulo extra ou de desenvolvimento sob medida.</p>
+    </div>
+    <div class="recursos">
+      <div class="rec"><span class="et">Cadastro</span><h3>Árvore de localizações</h3><p>Unidade, setor, área e sublocal. Um prédio, um condomínio ou uma carteira inteira de contratos na mesma estrutura.</p></div>
+      <div class="rec"><span class="et">Cadastro</span><h3>Ativos com TAG e criticidade</h3><p>Sistema, família, fabricante, modelo e criticidade A, B ou C. A criticidade entra direto no cálculo do prazo.</p></div>
+      <div class="rec"><span class="et">Configuração</span><h3>Catálogo do seu jeito</h3><p>Você edita categorias, sintomas, SLAs, fatores de parada e faixas de prioridade. Sem depender de código nem de fila de desenvolvimento.</p></div>
+      <div class="rec"><span class="et">Registro</span><h3>Foto e vídeo</h3><p>Anexo na abertura e na execução. O que o solicitante viu e o que o técnico entregou, lado a lado no mesmo chamado.</p></div>
+      <div class="rec"><span class="et">Registro</span><h3>Conversa no chamado</h3><p>Solicitante e equipe combinam acesso, horário e peça dentro do chamado. Decisão nenhuma fica perdida em grupo de mensagem.</p></div>
+      <div class="rec"><span class="et">Campo</span><h3>Uso no celular</h3><p>O técnico abre a fila dele no navegador do próprio telefone, com botões grandes e foto direto da câmera.</p></div>
+      <div class="rec"><span class="et">Acesso</span><h3>Quatro perfis</h3><p>Administrador, gestor/PCM, técnico e solicitante. O técnico enxerga só as unidades dele; o solicitante, só os próprios chamados.</p></div>
+      <div class="rec"><span class="et">Análise</span><h3>Indicadores prontos</h3><p>Backlog em horas, cumprimento de SLA, MTTR, chamados por categoria e por local, e reincidência por sintoma.</p></div>
+      <div class="rec"><span class="et">Segurança</span><h3>Dados isolados</h3><p>Cada empresa tem seu próprio espaço. A separação é feita no banco de dados, não na tela — um cliente não alcança o dado do outro.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= INDICADORES ======================= -->
+<section class="corte">
+  <div class="env">
+    <div class="cab-2">
+      <h2 class="tit">O relatório do mês para de ser um trabalho à parte.</h2>
+      <p class="sub">O que a equipe registra no dia a dia já é o número da reunião. Sem digitar nada duas vezes.</p>
+    </div>
+    <div class="painel">
+      <div class="pilha">
+        <div class="quadro">
+          <div class="quadro-cab"><h3>Agosto · 3 unidades</h3><span>exemplo</span></div>
+          <div class="kpis">
+            <div class="kpi"><span>Chamados</span><strong>94</strong><em>+11 vs. julho</em></div>
+            <div class="kpi"><span>SLA de execução</span><strong>91<small>%</small></strong><em>meta 90%</em></div>
+            <div class="kpi"><span>Backlog</span><strong>148<small>h</small></strong><em class="baixo">+22 h na semana</em></div>
+            <div class="kpi"><span>MTTR</span><strong>6,4<small>h</small></strong><em>−0,8 h</em></div>
+          </div>
+        </div>
+        <div>
+          <div class="fone" aria-label="Fila do técnico no celular">
+            <div class="fone-in">
+              <div class="fone-cab"><b>Meus chamados</b><span>M. SOUZA · 4</span></div>
+              <div class="fila">
+                <div class="item">
+                  <div class="l1"><span class="pin f-P1">P1</span><b>venc. em 1h10</b></div>
+                  <p>Falta de fase — Bloco B / Casa de força</p>
+                  <div class="med"><i style="width:78%;background:var(--p1)"></i></div>
+                </div>
+                <div class="item">
+                  <div class="l1"><span class="pin f-P2">P2</span><b>venc. em 5h20</b></div>
+                  <p>Vazamento — Torre 2 / Barrilete</p>
+                  <div class="med"><i style="width:44%;background:var(--p2)"></i></div>
+                </div>
+                <div class="item">
+                  <div class="l1"><span class="pin f-P3">P3</span><b>venc. em 2 dias</b></div>
+                  <p>Porta danificada — Loja Centro / Estoque</p>
+                  <div class="med"><i style="width:18%;background:var(--p3)"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="fone-nota">A fila do técnico, no navegador do próprio celular.</p>
+        </div>
+      </div>
+
+      <div class="pilha">
+        <div class="quadro">
+          <div class="quadro-cab"><h3>Chamados por categoria</h3><span>agosto · 94 no total</span></div>
+          <div class="barras">
+            <div class="barra"><span class="r">Elétrica</span><span class="t"><i style="width:100%"></i></span><span class="v">34</span></div>
+            <div class="barra"><span class="r">Hidráulica</span><span class="t"><i style="width:61.8%"></i></span><span class="v">21</span></div>
+            <div class="barra"><span class="r">Refrigeração</span><span class="t"><i style="width:52.9%"></i></span><span class="v">18</span></div>
+            <div class="barra"><span class="r">Civil</span><span class="t"><i style="width:35.3%"></i></span><span class="v">12</span></div>
+            <div class="barra"><span class="r">Infraestrutura</span><span class="t"><i style="width:26.5%"></i></span><span class="v">9</span></div>
+          </div>
+          <p class="legenda">Elétrica e hidráulica respondem por 59% do volume — é onde vale montar estoque de peça.</p>
+        </div>
+        <div class="quadro">
+          <div class="quadro-cab"><h3>Reincidência por sintoma</h3><span>90 dias · mesmo ativo</span></div>
+          <div class="barras">
+            <div class="barra"><span class="r">Infiltração</span><span class="t"><i class="b2" style="width:100%"></i></span><span class="v">7</span></div>
+            <div class="barra"><span class="r">Mau contato</span><span class="t"><i class="b2" style="width:71.4%"></i></span><span class="v">5</span></div>
+            <div class="barra"><span class="r">Sem água</span><span class="t"><i class="b2" style="width:57.1%"></i></span><span class="v">4</span></div>
+            <div class="barra"><span class="r">Porta danificada</span><span class="t"><i class="b2" style="width:42.9%"></i></span><span class="v">3</span></div>
+            <div class="barra"><span class="r">Vazamento</span><span class="t"><i class="b2" style="width:28.6%"></i></span><span class="v">2</span></div>
+          </div>
+          <p class="legenda">O mesmo sintoma voltando no mesmo ativo é o sinal de que o conserto tratou o efeito, não a causa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARA QUEM ======================= -->
+<section id="publico" class="corte">
+  <div class="env">
+    <div class="cab-1">
+      <h2 class="tit">Feito para quem cuida de prédio, loja e contrato — não de uma fábrica.</h2>
+    </div>
+    <div class="publico">
+      <div class="pub">
+        <span class="et">Facilities</span>
+        <div>
+          <h3>Empresas de facilities</h3>
+          <p>Uma árvore de locais por cliente atendido e o SLA do contrato virando prazo automático em cada chamado. No fim do mês, o indicador de cumprimento é a prestação de contas pronta.</p>
+        </div>
+      </div>
+      <div class="pub">
+        <span class="et">Contrato predial</span>
+        <div>
+          <h3>Contratos de manutenção predial</h3>
+          <p>Elétrica, hidráulica, civil e infraestrutura já vêm no catálogo, com SLA por sintoma — de <b>curto-circuito</b> a <b>infiltração ou goteira</b>. Você ajusta os prazos e começa a operar.</p>
+        </div>
+      </div>
+      <div class="pub">
+        <span class="et">Condomínio</span>
+        <div>
+          <h3>Condomínios residenciais e comerciais</h3>
+          <p>Síndico, portaria e zeladoria abrem pelo celular. O prestador vê apenas a fila dele; o morador acompanha o próprio chamado e dá a nota no final. A prestação de contas para a assembleia sai do próprio sistema.</p>
+        </div>
+      </div>
+      <div class="pub">
+        <span class="et">Varejo</span>
+        <div>
+          <h3>Varejo alimentício</h3>
+          <p>Balcão refrigerado parado é ruptura de venda. Parada total corta o prazo pela metade sem ninguém precisar pedir, e o chamado de <b>alta temperatura</b> nasce como P1 por regra, não por telefonema.</p>
+        </div>
+      </div>
+      <div class="pub">
+        <span class="et">Rede · CD</span>
+        <div>
+          <h3>Redes de lojas e centros de distribuição</h3>
+          <p>Várias unidades no mesmo sistema, com indicador comparando endereço a endereço. Cada técnico enxerga só a unidade dele; a gestão enxerga a rede inteira.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PREÇO ======================= -->
+<section id="preco" class="corte">
+  <div class="env">
+    <div class="preco">
+      <div>
+        <h2 class="tit">Preço na mesa, sem reunião para descobrir.</h2>
+        <p class="sub">A mensalidade é por cliente atendido e acompanha o tamanho do parque de ativos que você quer controlar. <b>Usuários ilimitados em qualquer faixa</b> — colocar o time inteiro para dentro não custa a mais, e é a única forma de os dados existirem.</p>
+        <div class="acoes">
+          <a class="bt bt-1" href="https://wa.me/5511988346666?text=Ola%21%20Vim%20pelo%20site%20do%20Seriema%20e%20gostaria%20de%20conhecer%20o%20sistema%20de%20gestao%20de%20manutencao." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.98-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+            Pedir uma proposta
+          </a>
+        </div>
+      </div>
+
+      <div class="pilha">
+        <div class="soma">
+        <div class="quadro">
+            <div class="quadro-cab"><h3>Implantação e treinamento</h3><span>cobrança única</span></div>
+            <div class="unico">
+              <strong>R$ 5.490,00</strong>
+              <p><b>50% no aceite da proposta e 50% no término da implantação.</b></p>
+            </div>
+          </div>
+          <div class="mais" aria-hidden="true">+</div>
+        <div class="quadro">
+            <div class="quadro-cab"><h3>Assinatura mensal</h3><span>usuários ilimitados</span></div>
+            <div class="tabela">
+              <div class="tl th"><span>Plano</span><span>Ativos</span><span>Por mês</span></div>
+              <div class="tl">
+                <span class="fx">Starter</span><span class="de">até 100 ativos</span>
+                <span class="vl"><b>R$ 690,00</b><em>R$ 586,50 com fidelidade</em></span>
+              </div>
+              <div class="tl">
+                <span class="fx">Pro</span><span class="de">de 101 a 300 ativos</span>
+                <span class="vl"><b>R$ 1.290,00</b><em>R$ 1.096,50 com fidelidade</em></span>
+              </div>
+              <div class="tl">
+                <span class="fx">Enterprise</span><span class="de">de 301 a 800 ativos</span>
+                <span class="vl"><b>R$ 2.190,00</b><em>R$ 1.861,50 com fidelidade</em></span>
+              </div>
+              <div class="tl">
+                <span class="fx">Corporate</span><span class="de">acima de 800 ativos</span>
+                <span class="vl"><b class="sc">sob consulta</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quadro">
+          <div class="quadro-cab"><h3>Condições de contrato</h3></div>
+          <div class="orc-l">
+            <span class="n">12 MESES</span>
+            <div><h3>Com fidelidade</h3><p>15% de desconto na mensalidade durante todo o contrato — são os valores em verde na tabela acima.</p></div>
+          </div>
+          <div class="orc-l">
+            <span class="n">6 MESES</span>
+            <div><h3>Sem fidelidade</h3><p>Prazo mínimo de 6 meses, com a mensalidade cheia da faixa contratada.</p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PERGUNTAS ======================= -->
+<section class="corte" style="padding-bottom:0">
+  <div class="perguntas">
+    <div class="pg"><h3>Precisa instalar alguma coisa?</h3><p>Não. É um endereço na internet e um login. Funciona no computador do escritório e no navegador do celular do técnico, sem aplicativo para baixar nem servidor para manter.</p></div>
+    <div class="pg"><h3>Dá para começar com a minha planilha?</h3><p>Dá — e é assim que a implantação começa. Locais, ativos e usuários entram por planilha em modelo pronto. O catálogo de categorias, sintomas e SLAs também.</p></div>
+    <div class="pg"><h3>Quanto tempo leva para implantar?</h3><p>Depende do tamanho do cadastro, não do sistema. Com as planilhas preenchidas, a implantação é questão de dias. O que costuma demorar é levantar a lista de ativos — e nisso a gente ajuda.</p></div>
+    <div class="pg"><h3>E se eu quiser prazos diferentes dos padrões?</h3><p>Você muda. Categorias, sintomas, SLA de atendimento e de execução, fatores de parada e faixas de prioridade são todos editáveis por você, dentro do sistema.</p></div>
+    <div class="pg"><h3>Meus dados ficam separados dos de outro cliente?</h3><p>Ficam. Cada empresa tem o próprio espaço isolado, e a separação é aplicada no banco de dados — não é um filtro de tela que alguém pode contornar.</p></div>
+    <div class="pg"><h3>E se eu decidir sair?</h3><p>Os dados são seus. A qualquer momento você exporta locais, ativos, chamados, histórico e anexos. Não há retenção de informação como forma de segurar contrato.</p></div>
+  </div>
+</section>
+
+<!-- ======================= CONTATO ======================= -->
+<section class="contato" id="contato">
+  <div class="env">
+    <div>
+      <h2 class="tit">Vamos falar sobre a sua operação.</h2>
+      <p class="sub">Me conte quantos endereços você atende, quantos ativos entrariam no sistema e por onde os chamados chegam hoje. Com isso já dá para fechar a faixa, montar a proposta e mostrar o sistema rodando com a sua cara de operação.</p>
+    </div>
+    <div class="cartoes">
+      <a class="cartao" href="https://wa.me/5511988346666?text=Ola%21%20Vim%20pelo%20site%20do%20Seriema%20e%20gostaria%20de%20conhecer%20o%20sistema%20de%20gestao%20de%20manutencao." target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.98-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+        <span><b>WhatsApp</b><span>+55 (11) 98834-6666</span></span>
+      </a>
+      <a class="cartao" href="mailto:contato@seriemaapp.com.br?subject=Seriema%20-%20quero%20conhecer%20o%20sistema&body=Ola%21%20Vim%20pelo%20site%20do%20Seriema%20e%20gostaria%20de%20conhecer%20o%20sistema%20de%20gestao%20de%20manutencao.%0A%0AEmpresa%3A%0AEnderecos%20atendidos%3A%0AAtivos%20aproximados%3A%0A">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.2 9-6.2"/></svg></span>
+        <span><b>E-mail</b><span>contato@seriemaapp.com.br</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="env">
+    <img class="claro" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20274.9%2076%22%20role%3D%22img%22%20aria-label%3D%22Seriema%22%3E%3Cg%20transform%3D%22translate%28-10%20-10%29%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22sc9%22%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%20fill%3D%22%233E7BBA%22%2F%3E%3Cg%20clip-path%3D%22url%28%23sc9%29%22%3E%3Cpath%20d%3D%22M43%2055%20C41%2064%2040%2074%2041%2090%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M39%2050%20C39%2039%2045%2034%2054%2034%20C61%2034%2065%2037%2066%2042%20L79%2047%20L65%2051%20C63%2056%2056%2057%2049%2056%20C42%2055%2039%2055%2039%2050%20Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M51%2033%20C49%2026%2050%2022%2054%2019%22%20fill%3D%22none%22%20stroke%3D%22%2388BDD8%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M57%2032%20C57%2025%2060%2021%2065%2019%22%20fill%3D%22none%22%20stroke%3D%22%2388BDD8%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2242%22%20r%3D%222.6%22%20fill%3D%22%233E7BBA%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M108.47%200.18Q105.61%200.18%20103.13%20-0.66Q100.64%20-1.5%2099.28%20-2.77L100.29%20-4.53Q101.61%20-3.39%20103.81%20-2.57Q106.01%20-1.76%20108.56%20-1.76Q112.17%20-1.76%20113.75%20-2.95Q115.34%20-4.14%20115.34%20-6.07Q115.34%20-7.48%20114.52%20-8.29Q113.71%20-9.11%20112.34%20-9.55Q110.98%20-9.99%20109.35%20-10.27Q107.72%20-10.56%20106.1%20-10.91Q104.47%20-11.26%20103.1%20-11.92Q101.74%20-12.58%20100.93%20-13.75Q100.11%20-14.92%20100.11%20-16.85Q100.11%20-18.61%20101.08%20-20.02Q102.05%20-21.43%20103.98%20-22.29Q105.92%20-23.14%20108.82%20-23.14Q110.98%20-23.14%20113.16%20-22.53Q115.34%20-21.91%20116.7%20-20.9L115.69%20-19.14Q114.24%20-20.24%20112.43%20-20.72Q110.63%20-21.21%20108.78%20-21.21Q105.44%20-21.21%20103.87%20-19.98Q102.31%20-18.74%20102.31%20-16.9Q102.31%20-15.44%20103.13%20-14.59Q103.94%20-13.73%20105.3%20-13.27Q106.67%20-12.8%20108.3%20-12.52Q109.92%20-12.23%20111.55%20-11.88Q113.18%20-11.53%20114.54%20-10.89Q115.91%20-10.25%20116.72%20-9.13Q117.54%20-8.01%20117.54%20-6.12Q117.54%20-4.22%20116.5%20-2.82Q115.47%20-1.41%20113.44%20-0.62Q111.42%200.18%20108.47%200.18ZM133.02%200.18Q129.55%200.18%20126.89%20-1.32Q124.22%20-2.82%20122.71%20-5.46Q121.19%20-8.1%20121.19%20-11.48Q121.19%20-14.92%20122.62%20-17.53Q124.05%20-20.15%20126.56%20-21.65Q129.06%20-23.14%20132.19%20-23.14Q135.31%20-23.14%20137.8%20-21.69Q140.28%20-20.24%20141.71%20-17.62Q143.14%20-15%20143.14%20-11.57Q143.14%20-11.44%20143.12%20-11.29Q143.1%20-11.13%20143.1%20-10.96H122.82V-12.67H141.91L141.03%20-11.84Q141.08%20-14.52%20139.91%20-16.65Q138.74%20-18.79%20136.76%20-20Q134.78%20-21.21%20132.19%20-21.21Q129.64%20-21.21%20127.63%20-20Q125.63%20-18.79%20124.49%20-16.65Q123.34%20-14.52%20123.34%20-11.79V-11.4Q123.34%20-8.58%20124.6%20-6.4Q125.85%20-4.22%20128.05%20-3.01Q130.25%20-1.8%20133.07%20-1.8Q135.27%20-1.8%20137.18%20-2.6Q139.1%20-3.39%20140.42%20-5.02L141.69%20-3.56Q140.2%20-1.72%20137.93%20-0.77Q135.66%200.18%20133.02%200.18ZM149.96%200V-22.97H152.08V-16.68L151.86%20-17.38Q152.82%20-20.15%20155.11%20-21.65Q157.4%20-23.14%20160.83%20-23.14V-20.99Q160.7%20-20.99%20160.57%20-21.01Q160.44%20-21.03%20160.3%20-21.03Q156.48%20-21.03%20154.32%20-18.63Q152.16%20-16.24%20152.16%20-11.97V0ZM167.3%200V-22.97H169.5V0ZM168.4%20-28.56Q167.65%20-28.56%20167.12%20-29.08Q166.6%20-29.61%20166.6%20-30.32Q166.6%20-31.06%20167.12%20-31.59Q167.65%20-32.12%20168.4%20-32.12Q169.19%20-32.12%20169.7%20-31.61Q170.2%20-31.11%20170.2%20-30.36Q170.2%20-29.61%20169.7%20-29.08Q169.19%20-28.56%20168.4%20-28.56ZM188.11%200.18Q184.64%200.18%20181.97%20-1.32Q179.31%20-2.82%20177.79%20-5.46Q176.28%20-8.1%20176.28%20-11.48Q176.28%20-14.92%20177.71%20-17.53Q179.14%20-20.15%20181.64%20-21.65Q184.15%20-23.14%20187.28%20-23.14Q190.4%20-23.14%20192.89%20-21.69Q195.37%20-20.24%20196.8%20-17.62Q198.23%20-15%20198.23%20-11.57Q198.23%20-11.44%20198.21%20-11.29Q198.19%20-11.13%20198.19%20-10.96H177.9V-12.67H197L196.12%20-11.84Q196.16%20-14.52%20195%20-16.65Q193.83%20-18.79%20191.85%20-20Q189.87%20-21.21%20187.28%20-21.21Q184.72%20-21.21%20182.72%20-20Q180.72%20-18.79%20179.58%20-16.65Q178.43%20-14.52%20178.43%20-11.79V-11.4Q178.43%20-8.58%20179.69%20-6.4Q180.94%20-4.22%20183.14%20-3.01Q185.34%20-1.8%20188.16%20-1.8Q190.36%20-1.8%20192.27%20-2.6Q194.18%20-3.39%20195.5%20-5.02L196.78%20-3.56Q195.28%20-1.72%20193.02%20-0.77Q190.75%200.18%20188.11%200.18ZM205.05%200V-22.97H207.16V-16.63L206.86%20-17.34Q207.87%20-20.02%20210.24%20-21.58Q212.62%20-23.14%20215.96%20-23.14Q219.4%20-23.14%20221.75%20-21.41Q224.1%20-19.67%20224.72%20-16.24L223.97%20-16.54Q224.9%20-19.49%20227.45%20-21.32Q230%20-23.14%20233.65%20-23.14Q236.42%20-23.14%20238.47%20-22.07Q240.52%20-20.99%20241.66%20-18.81Q242.8%20-16.63%20242.8%20-13.42V0H240.6V-13.24Q240.6%20-17.12%20238.71%20-19.14Q236.82%20-21.16%20233.43%20-21.16Q230.84%20-21.16%20228.94%20-20.06Q227.05%20-18.96%20226.04%20-16.98Q225.03%20-15%20225.03%20-12.23V0H222.83V-13.24Q222.83%20-17.12%20220.94%20-19.14Q219.04%20-21.16%20215.66%20-21.16Q213.06%20-21.16%20211.17%20-20.06Q209.28%20-18.96%20208.26%20-16.98Q207.25%20-15%20207.25%20-12.23V0ZM266.34%200V-5.24L266.26%20-6.03V-14.65Q266.26%20-17.86%20264.52%20-19.54Q262.78%20-21.21%20259.44%20-21.21Q257.06%20-21.21%20255.01%20-20.39Q252.97%20-19.58%20251.52%20-18.3L250.42%20-19.89Q252.13%20-21.43%20254.55%20-22.29Q256.97%20-23.14%20259.61%20-23.14Q263.88%20-23.14%20266.17%20-20.99Q268.46%20-18.83%20268.46%20-14.56V0ZM258.07%200.18Q255.52%200.18%20253.65%20-0.64Q251.78%20-1.45%20250.79%20-2.95Q249.8%20-4.44%20249.8%20-6.38Q249.8%20-8.14%20250.61%20-9.57Q251.43%20-11%20253.32%20-11.9Q255.21%20-12.8%20258.38%20-12.8H266.83V-11.09H258.42Q254.86%20-11.09%20253.43%20-9.77Q252%20-8.45%20252%20-6.47Q252%20-4.27%20253.67%20-2.95Q255.34%20-1.63%20258.38%20-1.63Q261.28%20-1.63%20263.29%20-2.95Q265.29%20-4.27%20266.26%20-6.78L266.87%20-5.28Q265.95%20-2.77%20263.73%20-1.3Q261.5%200.18%20258.07%200.18Z%22%20fill%3D%22%2316242C%22%20transform%3D%22translate%280%2053.97%29%22%2F%3E%3C%2Fsvg%3E" alt="Seriema">
+    <img class="escuro" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20274.9%2076%22%20role%3D%22img%22%20aria-label%3D%22Seriema%22%3E%3Cg%20transform%3D%22translate%28-10%20-10%29%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22sc10%22%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%2238%22%20fill%3D%22%236FA5DC%22%2F%3E%3Cg%20clip-path%3D%22url%28%23sc10%29%22%3E%3Cpath%20d%3D%22M43%2055%20C41%2064%2040%2074%2041%2090%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M39%2050%20C39%2039%2045%2034%2054%2034%20C61%2034%2065%2037%2066%2042%20L79%2047%20L65%2051%20C63%2056%2056%2057%2049%2056%20C42%2055%2039%2055%2039%2050%20Z%22%20fill%3D%22%23101A21%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M51%2033%20C49%2026%2050%2022%2054%2019%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M57%2032%20C57%2025%2060%2021%2065%2019%22%20fill%3D%22none%22%20stroke%3D%22%23101A21%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2242%22%20r%3D%222.6%22%20fill%3D%22%236FA5DC%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M108.47%200.18Q105.61%200.18%20103.13%20-0.66Q100.64%20-1.5%2099.28%20-2.77L100.29%20-4.53Q101.61%20-3.39%20103.81%20-2.57Q106.01%20-1.76%20108.56%20-1.76Q112.17%20-1.76%20113.75%20-2.95Q115.34%20-4.14%20115.34%20-6.07Q115.34%20-7.48%20114.52%20-8.29Q113.71%20-9.11%20112.34%20-9.55Q110.98%20-9.99%20109.35%20-10.27Q107.72%20-10.56%20106.1%20-10.91Q104.47%20-11.26%20103.1%20-11.92Q101.74%20-12.58%20100.93%20-13.75Q100.11%20-14.92%20100.11%20-16.85Q100.11%20-18.61%20101.08%20-20.02Q102.05%20-21.43%20103.98%20-22.29Q105.92%20-23.14%20108.82%20-23.14Q110.98%20-23.14%20113.16%20-22.53Q115.34%20-21.91%20116.7%20-20.9L115.69%20-19.14Q114.24%20-20.24%20112.43%20-20.72Q110.63%20-21.21%20108.78%20-21.21Q105.44%20-21.21%20103.87%20-19.98Q102.31%20-18.74%20102.31%20-16.9Q102.31%20-15.44%20103.13%20-14.59Q103.94%20-13.73%20105.3%20-13.27Q106.67%20-12.8%20108.3%20-12.52Q109.92%20-12.23%20111.55%20-11.88Q113.18%20-11.53%20114.54%20-10.89Q115.91%20-10.25%20116.72%20-9.13Q117.54%20-8.01%20117.54%20-6.12Q117.54%20-4.22%20116.5%20-2.82Q115.47%20-1.41%20113.44%20-0.62Q111.42%200.18%20108.47%200.18ZM133.02%200.18Q129.55%200.18%20126.89%20-1.32Q124.22%20-2.82%20122.71%20-5.46Q121.19%20-8.1%20121.19%20-11.48Q121.19%20-14.92%20122.62%20-17.53Q124.05%20-20.15%20126.56%20-21.65Q129.06%20-23.14%20132.19%20-23.14Q135.31%20-23.14%20137.8%20-21.69Q140.28%20-20.24%20141.71%20-17.62Q143.14%20-15%20143.14%20-11.57Q143.14%20-11.44%20143.12%20-11.29Q143.1%20-11.13%20143.1%20-10.96H122.82V-12.67H141.91L141.03%20-11.84Q141.08%20-14.52%20139.91%20-16.65Q138.74%20-18.79%20136.76%20-20Q134.78%20-21.21%20132.19%20-21.21Q129.64%20-21.21%20127.63%20-20Q125.63%20-18.79%20124.49%20-16.65Q123.34%20-14.52%20123.34%20-11.79V-11.4Q123.34%20-8.58%20124.6%20-6.4Q125.85%20-4.22%20128.05%20-3.01Q130.25%20-1.8%20133.07%20-1.8Q135.27%20-1.8%20137.18%20-2.6Q139.1%20-3.39%20140.42%20-5.02L141.69%20-3.56Q140.2%20-1.72%20137.93%20-0.77Q135.66%200.18%20133.02%200.18ZM149.96%200V-22.97H152.08V-16.68L151.86%20-17.38Q152.82%20-20.15%20155.11%20-21.65Q157.4%20-23.14%20160.83%20-23.14V-20.99Q160.7%20-20.99%20160.57%20-21.01Q160.44%20-21.03%20160.3%20-21.03Q156.48%20-21.03%20154.32%20-18.63Q152.16%20-16.24%20152.16%20-11.97V0ZM167.3%200V-22.97H169.5V0ZM168.4%20-28.56Q167.65%20-28.56%20167.12%20-29.08Q166.6%20-29.61%20166.6%20-30.32Q166.6%20-31.06%20167.12%20-31.59Q167.65%20-32.12%20168.4%20-32.12Q169.19%20-32.12%20169.7%20-31.61Q170.2%20-31.11%20170.2%20-30.36Q170.2%20-29.61%20169.7%20-29.08Q169.19%20-28.56%20168.4%20-28.56ZM188.11%200.18Q184.64%200.18%20181.97%20-1.32Q179.31%20-2.82%20177.79%20-5.46Q176.28%20-8.1%20176.28%20-11.48Q176.28%20-14.92%20177.71%20-17.53Q179.14%20-20.15%20181.64%20-21.65Q184.15%20-23.14%20187.28%20-23.14Q190.4%20-23.14%20192.89%20-21.69Q195.37%20-20.24%20196.8%20-17.62Q198.23%20-15%20198.23%20-11.57Q198.23%20-11.44%20198.21%20-11.29Q198.19%20-11.13%20198.19%20-10.96H177.9V-12.67H197L196.12%20-11.84Q196.16%20-14.52%20195%20-16.65Q193.83%20-18.79%20191.85%20-20Q189.87%20-21.21%20187.28%20-21.21Q184.72%20-21.21%20182.72%20-20Q180.72%20-18.79%20179.58%20-16.65Q178.43%20-14.52%20178.43%20-11.79V-11.4Q178.43%20-8.58%20179.69%20-6.4Q180.94%20-4.22%20183.14%20-3.01Q185.34%20-1.8%20188.16%20-1.8Q190.36%20-1.8%20192.27%20-2.6Q194.18%20-3.39%20195.5%20-5.02L196.78%20-3.56Q195.28%20-1.72%20193.02%20-0.77Q190.75%200.18%20188.11%200.18ZM205.05%200V-22.97H207.16V-16.63L206.86%20-17.34Q207.87%20-20.02%20210.24%20-21.58Q212.62%20-23.14%20215.96%20-23.14Q219.4%20-23.14%20221.75%20-21.41Q224.1%20-19.67%20224.72%20-16.24L223.97%20-16.54Q224.9%20-19.49%20227.45%20-21.32Q230%20-23.14%20233.65%20-23.14Q236.42%20-23.14%20238.47%20-22.07Q240.52%20-20.99%20241.66%20-18.81Q242.8%20-16.63%20242.8%20-13.42V0H240.6V-13.24Q240.6%20-17.12%20238.71%20-19.14Q236.82%20-21.16%20233.43%20-21.16Q230.84%20-21.16%20228.94%20-20.06Q227.05%20-18.96%20226.04%20-16.98Q225.03%20-15%20225.03%20-12.23V0H222.83V-13.24Q222.83%20-17.12%20220.94%20-19.14Q219.04%20-21.16%20215.66%20-21.16Q213.06%20-21.16%20211.17%20-20.06Q209.28%20-18.96%20208.26%20-16.98Q207.25%20-15%20207.25%20-12.23V0ZM266.34%200V-5.24L266.26%20-6.03V-14.65Q266.26%20-17.86%20264.52%20-19.54Q262.78%20-21.21%20259.44%20-21.21Q257.06%20-21.21%20255.01%20-20.39Q252.97%20-19.58%20251.52%20-18.3L250.42%20-19.89Q252.13%20-21.43%20254.55%20-22.29Q256.97%20-23.14%20259.61%20-23.14Q263.88%20-23.14%20266.17%20-20.99Q268.46%20-18.83%20268.46%20-14.56V0ZM258.07%200.18Q255.52%200.18%20253.65%20-0.64Q251.78%20-1.45%20250.79%20-2.95Q249.8%20-4.44%20249.8%20-6.38Q249.8%20-8.14%20250.61%20-9.57Q251.43%20-11%20253.32%20-11.9Q255.21%20-12.8%20258.38%20-12.8H266.83V-11.09H258.42Q254.86%20-11.09%20253.43%20-9.77Q252%20-8.45%20252%20-6.47Q252%20-4.27%20253.67%20-2.95Q255.34%20-1.63%20258.38%20-1.63Q261.28%20-1.63%20263.29%20-2.95Q265.29%20-4.27%20266.26%20-6.78L266.87%20-5.28Q265.95%20-2.77%20263.73%20-1.3Q261.5%200.18%20258.07%200.18Z%22%20fill%3D%22%23E7EEF2%22%20transform%3D%22translate%280%2053.97%29%22%2F%3E%3C%2Fsvg%3E" alt="Seriema">
+    <p>© 2026 Seriema app. Todos os direitos reservados.</p>
+  </div>
+</footer>
+</body>
+</html>

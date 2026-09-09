@@ -1,0 +1,23 @@
+{
+  "name": "Seriema — gestão de chamados de manutenção",
+  "short_name": "Seriema",
+  "description": "Sistema de gestão de chamados de manutenção para empresas de facilities, contratos de manutenção predial, condomínios e varejo alimentício. A prioridade e o SLA de cada chamado saem do catálogo de sintomas, da criticidade do ativo e do tipo de parada.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#EEF3F6",
+  "theme_color": "#2F6DA8",
+  "icons": [
+    {
+      "src": "/icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

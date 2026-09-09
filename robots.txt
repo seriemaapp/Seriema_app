@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seriemaapp.com.br/sitemap.xml
