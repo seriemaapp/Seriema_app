@@ -1,0 +1,13 @@
+/* Montserrat servida do próprio domínio — o CSS do Google Fonts
+   trava a pintura do texto e é bloqueado em parte das redes.
+   Subconjunto latino: cobre todo o português. */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:300;font-display:swap;
+  src:url('montserrat-300.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;
+  src:url('montserrat-400.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;
+  src:url('montserrat-500.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;
+  src:url('montserrat-600.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;
+  src:url('montserrat-700.woff2') format('woff2')}
