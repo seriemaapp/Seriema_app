@@ -31,21 +31,29 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);
   font-weight:300;font-size:15.5px;line-height:1.72;-webkit-text-size-adjust:100%}
-.env{max-width:860px;margin:0 auto;padding:0 20px}
+.env{max-width:780px;margin:0 auto;padding:0 20px}
 header.topo{background:var(--surface);border-bottom:1px solid var(--line);padding:26px 0 30px}
 header.topo .marca{display:flex;align-items:center;gap:11px;margin-bottom:26px}
+/* O logo leva à inicial. O lettering do SVG usa currentColor, então o link
+   PRECISA fixar a cor — sem isso a regra geral de <a> pintaria "seriema" de azul. */
+header.topo .marca a{display:block;line-height:0;color:var(--ink);text-decoration:none;
+  transition:opacity .15s}
+header.topo .marca a:hover{opacity:.72}
+header.topo .marca a:focus-visible{outline:2px solid var(--marca);outline-offset:5px;border-radius:4px}
+footer.pe .navpe{margin:0 0 9px}
+footer.pe .navpe .atual{color:var(--ink-3)}
 header.topo .marca svg{height:34px;width:auto;display:block}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:var(--marca);margin:0 0 8px}
 h1{font-size:34px;font-weight:600;line-height:1.2;margin:0 0 12px;letter-spacing:-.01em}
-.sub{font-size:15px;color:var(--ink-2);margin:0;max-width:62ch}
+.sub{font-size:15px;color:var(--ink-2);margin:0}
 .meta{margin-top:18px;font-size:12.5px;color:var(--ink-3)}
 main{padding:36px 0 60px}
 h2{font-size:20px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;scroll-margin-top:20px}
 h2:first-child{margin-top:0}
 h3{font-size:15.5px;font-weight:600;margin:24px 0 7px;color:var(--ink)}
-p{margin:0 0 13px;max-width:70ch}
-ul{margin:0 0 13px;padding-left:20px;max-width:70ch}
+p{margin:0 0 13px}
+ul{margin:0 0 13px;padding-left:20px}
 li{margin-bottom:7px}
 strong,b{font-weight:600}
 a{color:var(--marca-forte);text-decoration-thickness:1px;text-underline-offset:2px}
@@ -85,7 +93,7 @@ footer.pe a{color:var(--ink-2)}
 </head>
 <body>
 <header class="topo"><div class="env">
-  <div class="marca"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></div>
+  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema — ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
   <p class="eyebrow">Condições de uso do sistema</p>
   <h1>Termos de Uso</h1>
   <p class="sub">As regras de uso do sistema Seriema por quem opera no dia a dia — técnicos, gestores, solicitantes e administradores.</p>
@@ -95,9 +103,6 @@ footer.pe a{color:var(--ink-2)}
   <nav class="indice"><p>Nesta página</p><ol><li><a href="#s1">Aceitação e relação com o contrato</a></li><li><a href="#s2">Quem pode usar e com que perfil</a></li><li><a href="#s3">Conta, senha e responsabilidade</a></li><li><a href="#s4">Uso permitido e uso vedado</a></li><li><a href="#s5">Dados registrados no Sistema</a></li><li><a href="#s6">Disponibilidade, suporte e uso sem conexão</a></li><li><a href="#s7">Propriedade intelectual</a></li><li><a href="#s8">Suspensão e encerramento</a></li><li><a href="#s9">Limites de responsabilidade</a></li><li><a href="#s10">Disposições gerais e foro</a></li></ol></nav>
   <h2 id="s1">1. Aceitação e relação com o contrato</h2>
 
-<div class="preencher">
-<b>PREENCHER ANTES DE PUBLICAR</b> — razão social, CNPJ e comarca do foro.
-</div>
 <p>Estes Termos regem o uso do sistema <strong>Seriema</strong>, disponível em
 <strong>app.seriemaapp.com.br</strong> (o “Sistema”), operado pela
 SERIEMA SOLUCOES E SISTEMA DE GESTAO, CNPJ 58.430.120/0001-09.</p>
@@ -282,8 +287,8 @@ seja.</p>
 
 </div></main>
 <footer class="pe"><div class="env">
-  <p>Seriema · <a href="https://seriemaapp.com.br">seriemaapp.com.br</a> ·
-  <a href="mailto:contato@seriemaapp.com.br">contato@seriemaapp.com.br</a></p>
+  <p class="navpe"><a href="https://seriemaapp.com.br">Início</a> · <a href="https://seriemaapp.com.br/privacidade">Política de Privacidade</a> · <span class="atual">Termos de Uso</span></p>
+  <p>Seriema · <a href="mailto:contato@seriemaapp.com.br">contato@seriemaapp.com.br</a></p>
 </div></footer>
 </body>
 </html>

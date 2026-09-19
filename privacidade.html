@@ -31,21 +31,29 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);
   font-weight:300;font-size:15.5px;line-height:1.72;-webkit-text-size-adjust:100%}
-.env{max-width:860px;margin:0 auto;padding:0 20px}
+.env{max-width:780px;margin:0 auto;padding:0 20px}
 header.topo{background:var(--surface);border-bottom:1px solid var(--line);padding:26px 0 30px}
 header.topo .marca{display:flex;align-items:center;gap:11px;margin-bottom:26px}
+/* O logo leva à inicial. O lettering do SVG usa currentColor, então o link
+   PRECISA fixar a cor — sem isso a regra geral de <a> pintaria "seriema" de azul. */
+header.topo .marca a{display:block;line-height:0;color:var(--ink);text-decoration:none;
+  transition:opacity .15s}
+header.topo .marca a:hover{opacity:.72}
+header.topo .marca a:focus-visible{outline:2px solid var(--marca);outline-offset:5px;border-radius:4px}
+footer.pe .navpe{margin:0 0 9px}
+footer.pe .navpe .atual{color:var(--ink-3)}
 header.topo .marca svg{height:34px;width:auto;display:block}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:var(--marca);margin:0 0 8px}
 h1{font-size:34px;font-weight:600;line-height:1.2;margin:0 0 12px;letter-spacing:-.01em}
-.sub{font-size:15px;color:var(--ink-2);margin:0;max-width:62ch}
+.sub{font-size:15px;color:var(--ink-2);margin:0}
 .meta{margin-top:18px;font-size:12.5px;color:var(--ink-3)}
 main{padding:36px 0 60px}
 h2{font-size:20px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;scroll-margin-top:20px}
 h2:first-child{margin-top:0}
 h3{font-size:15.5px;font-weight:600;margin:24px 0 7px;color:var(--ink)}
-p{margin:0 0 13px;max-width:70ch}
-ul{margin:0 0 13px;padding-left:20px;max-width:70ch}
+p{margin:0 0 13px}
+ul{margin:0 0 13px;padding-left:20px}
 li{margin-bottom:7px}
 strong,b{font-weight:600}
 a{color:var(--marca-forte);text-decoration-thickness:1px;text-underline-offset:2px}
@@ -85,7 +93,7 @@ footer.pe a{color:var(--ink-2)}
 </head>
 <body>
 <header class="topo"><div class="env">
-  <div class="marca"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></div>
+  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema — ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
   <p class="eyebrow">Proteção de dados · LGPD</p>
   <h1>Política de Privacidade</h1>
   <p class="sub">Como a Seriema trata dados pessoais no site e no sistema, em que papel, onde os dados ficam e como você exerce os seus direitos.</p>
@@ -95,16 +103,13 @@ footer.pe a{color:var(--ink-2)}
   <nav class="indice"><p>Nesta página</p><ol><li><a href="#s1">Quem somos</a></li><li><a href="#s2">Os dois papéis da Seriema</a></li><li><a href="#s3">Que dados tratamos no site</a></li><li><a href="#s4">Cookies e armazenamento no seu aparelho</a></li><li><a href="#s5">Com quem compartilhamos</a></li><li><a href="#s6">Onde os dados ficam e transferência internacional</a></li><li><a href="#s7">Por quanto tempo guardamos</a></li><li><a href="#s8">Os seus direitos e como exercê-los</a></li><li><a href="#s9">Como protegemos os dados</a></li><li><a href="#s10">Canal de comunicação</a></li><li><a href="#s11">Alterações e foro</a></li></ol></nav>
   <h2 id="s1">1. Quem somos</h2>
 
-<b>PREENCHER ANTES DE PUBLICAR</b> — substitua os três campos marcados abaixo pela
-razão social, CNPJ e endereço da empresa. Documento de privacidade sem a
-identificação do controlador não cumpre o art. 9º da LGPD.
-</div>
 <p>Esta política é da SERIEMA SOLUCOES E SISTEMA DE GESTAO, inscrita no CNPJ sob o nº
-58.430.120/0001-09, com sede em Av. José André de Moraes, 1143, Taboão da Serra-SP,
+58.430.120/0001-09, com sede em Av. José André de Moraes, 1143, Taboão da Serra-SP, CEP 06755-260,
 que opera a marca <strong>Seriema</strong> e o sistema disponível em
 <strong>app.seriemaapp.com.br</strong> (o “Sistema”).</p>
 <p>Aqui está escrito quais dados pessoais tratamos, por quê, com quem
-compartilhamos, onde eles ficam e como você exerce os seus direitos.</p>
+compartilhamos, onde eles ficam e como você exerce os seus direitos. As regras
+de uso do Sistema estão nos <a href="https://seriemaapp.com.br/termos">Termos de Uso</a>.</p>
 
 <h2 id="s2">2. Os dois papéis da Seriema</h2>
 
@@ -263,6 +268,7 @@ com clareza:</p>
 contratuais</strong> aprovadas pela ANPD nos instrumentos com esses
 fornecedores.</p>
 
+
 <h2 id="s7">7. Por quanto tempo guardamos</h2>
 
 <table>
@@ -375,14 +381,14 @@ exigir. A versão vigente é sempre a publicada nesta página, com a data no top
 fornecedor que trate dados — são comunicadas por e-mail aos clientes ativos com
 pelo menos <strong>30 dias</strong> de antecedência.</p>
 <p>Esta política é regida pela lei brasileira. Fica eleito o foro da comarca de
-<mark>[cidade/UF]</mark> para dirimir controvérsias, com renúncia a qualquer
+Taboão da Serra/SP para dirimir controvérsias, com renúncia a qualquer
 outro, por mais privilegiado que seja.</p>
 
 
 </div></main>
 <footer class="pe"><div class="env">
-  <p>Seriema · <a href="https://seriemaapp.com.br">seriemaapp.com.br</a> ·
-  <a href="mailto:contato@seriemaapp.com.br">contato@seriemaapp.com.br</a></p>
+  <p class="navpe"><a href="https://seriemaapp.com.br">Início</a> · <span class="atual">Política de Privacidade</span> · <a href="https://seriemaapp.com.br/termos">Termos de Uso</a></p>
+  <p>Seriema · <a href="mailto:contato@seriemaapp.com.br">contato@seriemaapp.com.br</a></p>
 </div></footer>
 </body>
 </html>
