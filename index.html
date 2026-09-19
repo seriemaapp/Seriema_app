@@ -537,6 +537,10 @@ section{padding:74px 0}
 .rodape .env{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .rodape img{height:46px;width:auto}
 .rodape p{font-size:13.5px;color:var(--mudo)}
+.rodape .legais{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.rodape .legais a{font-size:13px;color:var(--mudo);text-decoration:none;
+  border-bottom:1px solid transparent;padding-bottom:1px}
+.rodape .legais a:hover{color:var(--tinta);border-bottom-color:var(--linha-2)}
 /* Link discreto de propósito: o rodapé é quieto, e um botão cheio aqui
    competiria com a chamada do topo. O respiro vertical é o que garante
    alvo de dedo suficiente no celular. */
@@ -941,6 +945,10 @@ section{padding:74px 0}
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 17v-3H3v-4h7V7l5 5-5 5Zm2-15h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-7v-2h7V4h-7Z"/></svg>
       Área do Cliente
     </a>
+    <nav class="legais">
+      <a href="/privacidade">Política de Privacidade</a>
+      <a href="/termos">Termos de Uso</a>
+    </nav>
     <p>© 2026 Seriema app. Todos os direitos reservados.</p>
   </div>
 </footer>
