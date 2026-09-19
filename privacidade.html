@@ -35,7 +35,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);
 header.topo{background:var(--surface);border-bottom:1px solid var(--line);padding:26px 0 30px}
 header.topo .marca{display:flex;align-items:center;gap:11px;margin-bottom:26px}
 /* O logo leva à inicial. O lettering do SVG usa currentColor, então o link
-   PRECISA fixar a cor — sem isso a regra geral de <a> pintaria "seriema" de azul. */
+   PRECISA fixar a cor. Sem isso a regra geral de <a> pintaria "seriema" de azul. */
 header.topo .marca a{display:block;line-height:0;color:var(--ink);text-decoration:none;
   transition:opacity .15s}
 header.topo .marca a:hover{opacity:.72}
@@ -93,7 +93,7 @@ footer.pe a{color:var(--ink-2)}
 </head>
 <body>
 <header class="topo"><div class="env">
-  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema — ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
+  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema: ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
   <p class="eyebrow">Proteção de dados · LGPD</p>
   <h1>Política de Privacidade</h1>
   <p class="sub">Como a Seriema trata dados pessoais no site e no sistema, em que papel, onde os dados ficam e como você exerce os seus direitos.</p>
@@ -118,30 +118,29 @@ pelo quê. A Seriema atua em <strong>dois papéis distintos</strong>, e as regra
 mudam conforme o caso.</p>
 
 <div class="bloco">
-<h3>No site seriemaapp.com.br — somos CONTROLADORES</h3>
+<h3>No site seriemaapp.com.br: somos CONTROLADORES</h3>
 <p>Quando você visita o site, lê uma página ou nos procura pelo WhatsApp ou por
 e-mail, é a Seriema quem decide por que e como tratar esses dados. Nesse caso
 respondemos diretamente a você, e é esta política que se aplica.</p>
 </div>
 
 <div class="bloco">
-<h3>Dentro do Sistema — somos OPERADORES</h3>
+<h3>Dentro do Sistema: somos OPERADORES</h3>
 <p>Os chamados, os cadastros de técnicos e solicitantes, as fotos e o histórico
-que existem dentro do Sistema pertencem à <strong>empresa contratante</strong> —
-o empregador ou o condomínio que assinou o contrato. É ela quem decide o que
+que existem dentro do Sistema pertencem à <strong>empresa contratante</strong>, o empregador
+ou o condomínio que assinou o contrato. É ela quem decide o que
 coletar, para que usar e por quanto tempo guardar. Ela é a
 <strong>controladora</strong>; a Seriema apenas trata esses dados por conta dela,
 seguindo as instruções do contrato.</p>
 <p>Se você é técnico, solicitante ou gestor e quer acessar, corrigir ou excluir
 os seus dados no Sistema, <strong>procure primeiro a empresa que lhe deu o
-acesso</strong>. Se preferir falar conosco, encaminhamos o pedido a ela e a
-apoiamos na resposta — mas a decisão é dela, não nossa.</p>
+acesso</strong>. Se preferir falar conosco, encaminhamos o pedido a ela e a apoiamos na resposta, mas a decisão é dela, não nossa.</p>
 </div>
 
 <div class="nota">
 <strong>Por que isso importa para você.</strong> Um chamado de manutenção registra
 quem pediu, quem executou, quando, e às vezes uma foto do local. Quem decide que
-esse registro existe é o empregador, no exercício da própria atividade — não a
+esse registro existe é o empregador, no exercício da própria atividade, não a
 Seriema. Tratar isso com clareza evita que você procure a parte errada quando
 quiser exercer um direito.
 </div>
@@ -164,7 +163,7 @@ membro nem newsletter.</p>
 <tr><td>Endereço IP, data, hora e navegador</td>
     <td>Registro automático de acesso ao site, gerado pelo servidor que entrega
         as páginas.</td>
-    <td>Cumprimento de obrigação legal — art. 15 do Marco Civil da Internet
+    <td>Cumprimento de obrigação legal, art. 15 do Marco Civil da Internet
         (art. 7º, II)</td></tr>
 </tbody>
 </table>
@@ -187,7 +186,7 @@ verificado abrindo o painel do desenvolvedor do seu navegador.</p>
 <h2 id="s4">4. Cookies e armazenamento no seu aparelho</h2>
 
 <p><strong>O site seriemaapp.com.br não usa cookies.</strong> Por isso não existe
-banner de consentimento — não haveria o que consentir.</p>
+banner de consentimento. Não haveria o que consentir.</p>
 
 <h3>Dentro do Sistema</h3>
 <p>O Sistema guarda no seu próprio navegador, no armazenamento local do
@@ -203,7 +202,7 @@ aparelho, dois tipos de informação estritamente necessários para ele funciona
 <p>Essas informações ficam <strong>no seu aparelho</strong>, não são usadas para
 publicidade nem compartilhadas com terceiros, e são apagadas quando você sai do
 Sistema pelo botão “Sair”. Por serem indispensáveis à prestação do serviço, não
-dependem de consentimento — mas você pode removê-las a qualquer momento limpando
+dependem de consentimento, mas você pode removê-las a qualquer momento limpando
 os dados do site no seu navegador.</p>
 
 <h2 id="s5">5. Com quem compartilhamos</h2>
@@ -316,16 +315,16 @@ de segurança, conforme o ciclo de retenção dos backups.</p>
 
 <div class="nota">
 <strong>Onde pedir.</strong> Se o dado está <strong>dentro do Sistema</strong>,
-procure a empresa que lhe deu o acesso — ela é a controladora. Se o dado é de
+procure a empresa que lhe deu o acesso. Ela é a controladora. Se o dado é de
 <strong>contato comercial ou de navegação no site</strong>, fale conosco pelo
 canal abaixo.
 </div>
 
 <p>Respondemos em até <strong>15 dias</strong>. A Seriema é agente de tratamento
 de pequeno porte, e o art. 14 da Resolução CD/ANPD nº 2/2022 nos permitiria
-responder em dobro desse prazo — <strong>optamos por não usar essa prerrogativa</strong>.
+responder em dobro desse prazo. <strong>Optamos por não usar essa prerrogativa</strong>.
 Podemos pedir informação adicional para confirmar a sua identidade antes de
-atender — é uma proteção contra alguém pedir dados se passando por você.</p>
+atender. É uma proteção contra alguém pedir dados se passando por você.</p>
 
 <h2 id="s9">9. Como protegemos os dados</h2>
 
@@ -348,7 +347,7 @@ atender — é uma proteção contra alguém pedir dados se passando por você.<
 </ul>
 <p>Nenhum sistema é imune. Se ocorrer incidente de segurança com risco relevante,
 comunicamos a empresa contratante em até <strong>24 horas</strong> do
-conhecimento, com o que foi afetado e as medidas tomadas — prazo que permite a
+conhecimento, com o que foi afetado e as medidas tomadas, prazo que permite a
 ela cumprir os <strong>3 dias úteis</strong> que a Resolução CD/ANPD nº 15/2024
 lhe concede para comunicar a ANPD e os titulares. Quando a Seriema for a
 controladora, nós mesmos fazemos essa comunicação.</p>
@@ -357,13 +356,13 @@ controladora, nós mesmos fazemos essa comunicação.</p>
 
 <p>A Seriema é <strong>agente de tratamento de pequeno porte</strong> e, nos
 termos do art. 11 da Resolução CD/ANPD nº 2/2022, está dispensada de nomear
-encarregado — mas mantém canal de comunicação com os titulares, como exige o
+encarregado, mas mantém canal de comunicação com os titulares, como exige o
 mesmo artigo.</p>
 
 <div class="bloco">
 <h3>Fale sobre os seus dados</h3>
 <p><strong>E-mail:</strong> <a href="mailto:contato@seriemaapp.com.br">contato@seriemaapp.com.br</a><br>
-<strong>Assunto sugerido:</strong> “LGPD — pedido de titular”</p>
+<strong>Assunto sugerido:</strong> “LGPD: pedido de titular”</p>
 <p>Escreva o que você quer (acesso, correção, exclusão, portabilidade) e, se
 possível, se o dado está no Sistema ou veio de contato comercial. Isso encurta a
 resposta.</p>
@@ -377,8 +376,8 @@ resposta.</p>
 
 <p>Esta política pode mudar quando o serviço mudar ou quando a regulamentação
 exigir. A versão vigente é sempre a publicada nesta página, com a data no topo.</p>
-<p>Alterações relevantes — mudança de finalidade, de base legal ou de
-fornecedor que trate dados — são comunicadas por e-mail aos clientes ativos com
+<p>São relevantes as mudanças de finalidade, de base legal ou de fornecedor
+que trate dados. Nesses casos, comunicamos por e-mail aos clientes ativos com
 pelo menos <strong>30 dias</strong> de antecedência.</p>
 <p>Esta política é regida pela lei brasileira. Fica eleito o foro da comarca de
 Taboão da Serra/SP para dirimir controvérsias, com renúncia a qualquer

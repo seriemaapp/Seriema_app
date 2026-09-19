@@ -35,7 +35,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);
 header.topo{background:var(--surface);border-bottom:1px solid var(--line);padding:26px 0 30px}
 header.topo .marca{display:flex;align-items:center;gap:11px;margin-bottom:26px}
 /* O logo leva à inicial. O lettering do SVG usa currentColor, então o link
-   PRECISA fixar a cor — sem isso a regra geral de <a> pintaria "seriema" de azul. */
+   PRECISA fixar a cor. Sem isso a regra geral de <a> pintaria "seriema" de azul. */
 header.topo .marca a{display:block;line-height:0;color:var(--ink);text-decoration:none;
   transition:opacity .15s}
 header.topo .marca a:hover{opacity:.72}
@@ -93,10 +93,10 @@ footer.pe a{color:var(--ink-2)}
 </head>
 <body>
 <header class="topo"><div class="env">
-  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema — ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
+  <div class="marca"><a href="https://seriemaapp.com.br" aria-label="Seriema: ir para a página inicial"><svg viewBox="0 0 300 76" role="img" aria-label="Seriema"><g transform="translate(-10 -10)"><defs><clipPath id="lg"><circle cx="48" cy="48" r="38"/></clipPath></defs><circle cx="48" cy="48" r="38" fill="#3E7BBA"/><g clip-path="url(#lg)"><path d="M43 55 C41 64 40 74 41 90" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/><path d="M39 50 C39 39 45 34 54 34 C61 34 65 37 66 42 L79 47 L65 51 C63 56 56 57 49 56 C42 55 39 55 39 50 Z" fill="#FFFFFF"/><circle cx="57" cy="43" r="3.4" fill="#3E7BBA"/><path d="M50 33 C49 27 51 22 55 19" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/><path d="M56 33 C56 27 59 22 63 20" fill="none" stroke="#88BDD8" stroke-width="4.4" stroke-linecap="round"/></g></g><text x="110" y="62" font-family="Montserrat,sans-serif" font-size="46" font-weight="300" fill="currentColor">seriema</text></svg></a></div>
   <p class="eyebrow">Condições de uso do sistema</p>
   <h1>Termos de Uso</h1>
-  <p class="sub">As regras de uso do sistema Seriema por quem opera no dia a dia — técnicos, gestores, solicitantes e administradores.</p>
+  <p class="sub">As regras de uso do sistema Seriema por quem opera no dia a dia: técnicos, gestores, solicitantes e administradores.</p>
   <p class="meta">Versão 1.0 · em vigor desde 14 de setembro de 2026</p>
 </div></header>
 <main><div class="env">
@@ -145,7 +145,7 @@ pessoa. Não há cadastro por conta própria.</p>
     imediatamente.</li>
 <li>O administrador da empresa contratante pode <strong>desativar</strong> o seu
     acesso a qualquer momento, inclusive no desligamento. Os registros que você
-    produziu permanecem no histórico — é o que sustenta a trilha de auditoria.</li>
+    produziu permanecem no histórico. É o que sustenta a trilha de auditoria.</li>
 </ul>
 
 <h3>Aparelho compartilhado</h3>
@@ -172,13 +172,13 @@ de novo naquele aparelho, e sair ali deixaria o próximo técnico sem acesso.</p
 <li>Usar robô, raspador ou automação para extrair dados em massa;</li>
 <li>Remover ou ocultar marcas e avisos de titularidade;</li>
 <li>Inserir conteúdo ilícito, ofensivo ou que viole direito de terceiro;</li>
-<li>Usar o Sistema para finalidade diversa da manutenção — em especial, para
+<li>Usar o Sistema para finalidade diversa da manutenção, em especial para
     monitorar pessoas.</li>
 </ul>
 
 <div class="nota">
 <strong>Sobre fotos e vídeos.</strong> Os anexos servem para registrar o
-<strong>problema e a intervenção</strong> — equipamento, instalação, local. Evite
+<strong>problema e a intervenção</strong>: equipamento, instalação, local. Evite
 fotografar pessoas, documentos e áreas alheias ao serviço. Quem anexa responde
 pelo conteúdo, e a empresa contratante, como controladora, responde pela
 finalidade.
@@ -186,8 +186,8 @@ finalidade.
 
 <h2 id="s5">5. Dados registrados no Sistema</h2>
 
-<p>Os dados que você e a sua equipe registram no Sistema — chamados, cadastros,
-fotos, apontamentos e histórico — são de <strong>titularidade da empresa
+<p>Chamados, cadastros, fotos, apontamentos e histórico registrados por você e
+pela sua equipe no Sistema são de <strong>titularidade da empresa
 contratante</strong>. A Seriema não adquire direito sobre eles além do necessário
 para prestar o serviço.</p>
 <ul>
@@ -232,8 +232,7 @@ Seriema, protegidos pela Lei nº 9.610/1998 e pela Lei nº 9.609/1998.</p>
 <p>Estes Termos concedem apenas uma <strong>licença de uso</strong>, não
 exclusiva, intransferível e limitada à vigência do contrato. Nada aqui transfere
 propriedade.</p>
-<p>Sugestões e pedidos de melhoria que você enviar podem ser implementados sem
-que isso gere direito, remuneração ou coautoria — e, se implementados,
+<p>Sugestões e pedidos de melhoria que você enviar podem ser implementados sem que isso gere direito, remuneração ou coautoria. Se implementados,
 incorporam-se ao Sistema.</p>
 
 <h2 id="s8">8. Suspensão e encerramento</h2>
