@@ -553,7 +553,92 @@ section{padding:74px 0}
 }
 .elo-cliente svg{width:16px;height:16px;flex:none}
 .elo-cliente:hover{color:var(--azul);border-color:var(--azul);background:var(--azul-lavado)}
+
+/* === entrada por rolagem === */
+/* =====================================================================
+   ENTRADA POR ROLAGEM
+
+   Tudo abaixo depende de html.js, e essa classe só entra pelo script do
+   cabeçalho, e só quando a pessoa não pediu menos movimento no sistema.
+   Sem JavaScript, nada aqui se aplica e a página fica como sempre foi.
+
+   Só opacity e transform são animados: são as duas propriedades que o
+   navegador resolve sem recalcular layout. Não há will-change em lugar
+   nenhum de propósito. Marcar quarenta elementos criaria quarenta
+   camadas de composição permanentes, e no celular isso custa memória o
+   tempo todo para ganhar 16 ms uma única vez.
+   ===================================================================== */
+
+/* curva única, para todo o site ter o mesmo jeito de entrar */
+:root{--entra:cubic-bezier(.22,.61,.36,1)}
+
+/* blocos com espaço em volta: aparecem subindo */
+html.js .corte .cab-1,html.js .corte .cab-2,html.js .pilha > *,html.js .preco > div:first-child,html.js .contato .env > *{
+  opacity:0;transform:translate3d(0,16px,0);
+  transition:opacity .58s var(--entra),transform .58s var(--entra);
+}
+/* ladrilhos de grade: só aparecem. Não sobem porque a grade é feita de
+   fios de 1px e o movimento abriria a fresta entre um cartão e outro. */
+html.js .col-c,html.js .passo,html.js .rec,html.js .pub,html.js .pg{
+  opacity:0;transition:opacity .52s var(--entra);
+}
+html.js .corte .cab-1.dentro,html.js .corte .cab-2.dentro,html.js .pilha > *.dentro,html.js .preco > div:first-child.dentro,html.js .contato .env > *.dentro,html.js .col-c.dentro,html.js .passo.dentro,html.js .rec.dentro,html.js .pub.dentro,html.js .pg.dentro{opacity:1;transform:none}
+
+/* barras e medidores crescem da esquerda, por escala, não por largura:
+   a largura final continua sendo a do HTML, e o navegador não refaz
+   conta nenhuma de layout durante o crescimento. */
+html.js .corte .barra .t i,
+html.js .corte .item .med i{
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .85s var(--entra);
+}
+html.js .corte .dentro .barra .t i,
+html.js .corte .dentro .item .med i{transform:none}
+/* a barra de baixo sai um instante depois da de cima: o olho lê como
+   preenchimento, não como quatro coisas piscando juntas */
+html.js .corte .barra:nth-child(2) .t i,
+html.js .corte .item:nth-child(2) .med i{transition-delay:.07s}
+html.js .corte .barra:nth-child(3) .t i,
+html.js .corte .item:nth-child(3) .med i{transition-delay:.14s}
+html.js .corte .barra:nth-child(4) .t i{transition-delay:.21s}
+html.js .corte .barra:nth-child(5) .t i{transition-delay:.28s}
+
+/* a barra do topo ganha sombra quando a página sai do começo: o único
+   sinal de que existe conteúdo acima */
+html.js .topo{transition:box-shadow .25s ease,border-color .25s ease}
+html.js .topo.rolado{box-shadow:0 10px 26px -20px rgba(11,20,26,.55)}
+
+/* seção em que a leitura está, marcada no menu */
+html.js .menu a.aqui{color:var(--azul);border-color:var(--azul)}
+
+/* âncora do menu: o destino para abaixo da barra fixa, não atrás dela */
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+section[id],main[id]{scroll-margin-top:96px}
+
+/* IMPRESSÃO: no papel não existe rolagem, então não existe gatilho. Sem
+   esta regra, quem mandasse a página de preços para a impressora levaria
+   folhas em branco. */
+@media print{
+  html.js *{opacity:1 !important;transform:none !important;transition:none !important}
+}
+
+/* usado por um instante, quando um bloco precisa aparecer já pronto, sem
+   animar: página aberta direto numa âncora, ou recarregada no meio */
+html.js .sem-anim,html.js .sem-anim *{transition:none !important}
 </style>
+<script>
+/* Liga as transições de entrada ANTES da primeira pintura. Se este
+   script não rodar, a classe não entra, o CSS de entrada não se aplica e
+   a página aparece inteira, como hoje. Nenhum conteúdo depende de
+   JavaScript para existir. */
+(function(){try{
+  var m=window.matchMedia;
+  if(m && m('(prefers-reduced-motion: reduce)').matches) return;
+  if(!('IntersectionObserver' in window)) return;
+  document.documentElement.className+=' js';
+}catch(e){}})();
+</script>
 </head>
 <body>
 <header class="topo">
@@ -952,5 +1037,123 @@ section{padding:74px 0}
     <p>© 2026 Seriema app. Todos os direitos reservados.</p>
   </div>
 </footer>
+<script>
+/* =====================================================================
+   Seriema · entrada por rolagem
+   ---------------------------------------------------------------------
+   Nenhuma biblioteca e nada que leia a posição da página a cada quadro.
+   Quem avisa que um elemento entrou na tela é o próprio navegador, pelo
+   IntersectionObserver. O código só troca classe.
+   ===================================================================== */
+(function(){
+  var raiz = document.documentElement;
+  if (raiz.className.indexOf('js') < 0) return;   /* movimento desligado */
+
+  /* ---- 1. blocos e cartões entram uma vez, e ficam ---------------- */
+  var fila = Array.prototype.slice.call(document.querySelectorAll(".corte .cab-1,.corte .cab-2,.pilha > *,.preco > div:first-child,.contato .env > *,.col-c,.passo,.rec,.pub,.pg"));
+
+  /* Atraso por posição dentro do próprio grupo, com teto de quatro: o
+     nono cartão de uma grade não pode entrar meio segundo depois do
+     primeiro, senão vira espera. */
+  fila.forEach(function(el){
+    var p = el.parentNode;
+    var i = p.__n ? p.__n : 0;
+    p.__n = i + 1;
+    if (i) el.style.transitionDelay = Math.min(i, 4) * 70 + 'ms';
+  });
+
+  var olho;
+
+  function revelar(el, animando){
+    if (el.classList.contains('dentro')) return;
+    if (animando) {
+      el.classList.add('dentro');
+      /* o atraso serviu para a entrada; se ficasse, atrasaria também
+         qualquer transição desse elemento daqui para a frente */
+      if (el.style.transitionDelay) {
+        el.addEventListener('transitionend', function limpa(){
+          el.style.transitionDelay = '';
+          el.removeEventListener('transitionend', limpa);
+        });
+      }
+    } else {
+      el.style.transitionDelay = '';
+      el.classList.add('sem-anim');
+      el.classList.add('dentro');
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ el.classList.remove('sem-anim'); });
+      });
+    }
+    olho.unobserve(el);
+  }
+
+  olho = new IntersectionObserver(function(itens){
+    itens.forEach(function(it){ if (it.isIntersecting) revelar(it.target, true); });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+
+  fila.forEach(function(el){ olho.observe(el); });
+
+  /* ---- 2. o que a página pulou por cima ------------------------------
+     O IntersectionObserver só avisa quando o elemento ATRAVESSA a borda
+     da tela. Num salto ele não atravessa nada: estava abaixo e apareceu
+     acima, sem nunca ter passado pelo meio. O observador fica calado e o
+     bloco ficaria invisível para quem rolasse de volta. Isso acontece em
+     três situações reais: link de âncora (/#preco), recarga no meio da
+     página, e arrastão na barra de rolagem.
+
+     A varredura anda só pelo COMEÇO da fila, que está em ordem de
+     documento, e para no primeiro bloco que ainda não passou por cima.
+     Na rolagem normal isso é uma medida por quadro, e quase sempre a
+     primeira já encerra. Quando a fila acaba, o ouvinte se desliga. */
+  var ponta = 0;
+  function pular(){ while (ponta < fila.length && fila[ponta].classList.contains('dentro')) ponta++; }
+  function varrer(){
+    pular();
+    while (ponta < fila.length && fila[ponta].getBoundingClientRect().bottom < 0) {
+      revelar(fila[ponta], false);
+      ponta++;
+      pular();
+    }
+  }
+
+  /* ---- 3. menu marca a seção lida, e a barra ganha sombra ---------- */
+  var elos = {}, secoes = [];
+  Array.prototype.forEach.call(document.querySelectorAll('.menu a[href^="#"]'), function(a){
+    var alvo = document.getElementById(a.getAttribute('href').slice(1));
+    if (alvo) { elos[alvo.id] = a; secoes.push(alvo); }
+  });
+  if (secoes.length) {
+    /* a faixa é a metade de cima da tela: a seção "atual" é a que está
+       sendo lida, não a que encostou na borda de baixo */
+    var bussola = new IntersectionObserver(function(itens){
+      itens.forEach(function(it){
+        var a = elos[it.target.id];
+        if (a) a.classList.toggle('aqui', it.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secoes.forEach(function(s){ bussola.observe(s); });
+  }
+
+  var topo = document.querySelector('.topo'), pedido = false;
+  function aoRolar(){
+    if (pedido) return;
+    pedido = true;
+    requestAnimationFrame(function(){
+      if (topo) topo.classList.toggle('rolado', (window.pageYOffset || 0) > 8);
+      varrer();
+      if (ponta >= fila.length && topo === null) removeEventListener('scroll', aoRolar);
+      pedido = false;
+    });
+  }
+  addEventListener('scroll', aoRolar, { passive: true });
+
+  /* âncora na abertura e restauração de rolagem chegam depois do load em
+     alguns navegadores; por isso a varredura roda também fora do scroll */
+  varrer();
+  addEventListener('load', varrer);
+  addEventListener('hashchange', varrer);
+  setTimeout(varrer, 300);
+})();
+</script>
 </body>
 </html>
