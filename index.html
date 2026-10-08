@@ -1048,6 +1048,39 @@ main > section:has(.contraste)::before{
   #contato::after{background:radial-gradient(320px 300px at 98% 97%,var(--brilho-c),transparent 72%)}
 }
 
+/* ---------- 9. demonstração em vídeo ----------
+   Limpo: canto arredondado e nada mais. Sem sombra, sem moldura, sem
+   brilho atrás e sem legenda, como pedido. O vídeo já traz as molduras
+   do navegador e do celular desenhadas dentro dele; pôr mais uma por
+   fora seria moldura dentro de moldura.
+
+   A seção fica mais apertada que as outras de propósito: ela não tem
+   título nem texto, e o respiro padrão de 88px em cima e embaixo faria
+   o vídeo flutuar solto entre o herói e o argumento seguinte.
+
+   `aspect-ratio` com `height:auto` reserva o espaço antes de o arquivo
+   chegar, então a página não dá o pulo que toda mídia sem medida dá
+   quando carrega. */
+.demo{padding:18px 0 72px}
+.demo-v,.demo-i{
+  display:block;width:100%;height:auto;aspect-ratio:16/9;
+  border-radius:16px;background:var(--chao);
+}
+.demo-i{display:none}
+
+/* Quem marcou "reduzir movimento" no sistema recebe a imagem parada, e o
+   vídeo nem é pintado. Sem uma linha de JavaScript: o site continua com
+   os mesmos três scripts que já tinha. */
+@media (prefers-reduced-motion:reduce){
+  .demo-v{display:none}
+  .demo-i{display:block}
+}
+
+@media (max-width:860px){
+  .demo{padding:6px 0 48px}
+  .demo-v,.demo-i{border-radius:11px}
+}
+
 </style>
 <script>
 /* Liga as transições de entrada ANTES da primeira pintura. Se este
@@ -1139,6 +1172,19 @@ main > section:has(.contraste)::before{
     </div>
   </div>
 </div>
+
+<!-- ======================= DEMONSTRAÇÃO ======================= -->
+<section class="corte demo">
+  <div class="env">
+    <video class="demo-v" autoplay muted loop playsinline preload="metadata"
+           width="1920" height="1080" poster="/demo-seriema-poster.jpg">
+      <source src="/demo-seriema.webm" type="video/webm">
+      <source src="/demo-seriema.mp4" type="video/mp4">
+    </video>
+    <img class="demo-i" src="/demo-seriema-poster.jpg" width="1920" height="1080"
+         alt="Telas do Seriema: do painel de gestão, com indicadores e fila de chamados, até a execução do chamado no celular do técnico.">
+  </div>
+</section>
 
 <!-- ======================= CONTRASTE ======================= -->
 <section class="corte">
