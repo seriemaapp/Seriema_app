@@ -665,6 +665,389 @@ section[id],main[id]{scroll-margin-top:96px}
 /* usado por um instante, quando um bloco precisa aparecer já pronto, sem
    animar: página aberta direto numa âncora, ou recarregada no meio */
 html.js .sem-anim,html.js .sem-anim *{transition:none !important}
+
+/* ===== AJUSTES VISUAIS ===== */
+/* =====================================================================
+   PASSADA DE LIMPEZA VISUAL
+   ---------------------------------------------------------------------
+   Bloco acrescentado no fim do estilo, de propósito: não toca em uma única
+   linha da marcação, então o conteúdo, o SEO e os dados estruturados ficam
+   exatamente como estavam. Para voltar atrás, apaga-se o bloco inteiro.
+
+   O DIAGNÓSTICO, EM NÚMEROS
+   A página tinha 68 elementos com borda, 58 com canto arredondado e 12 com
+   sombra. Quase todo conteúdo morava dentro de um retângulo, e os
+   retângulos eram desenhados com filete de 1px. É isso que dá a sensação
+   de genérico: não é a tipografia nem a cor, que estão boas. É que cada
+   bloco pede licença com uma moldura em vez de ocupar o espaço.
+
+   A REGRA QUE SEGUI
+   Moldura só fica onde ela SIGNIFICA alguma coisa. O painel do herói é uma
+   tela do produto: ali a borda diz "isto é a interface", e fica. Uma lista
+   de seis recursos não é uma planilha, então não leva grade. Quatro etapas
+   em sequência não precisam de parede entre elas: o número já separa.
+
+   O que faz o trabalho no lugar das bordas é espaço e tipografia. Por isso
+   as seções respiram mais: tirar linha sem dar ar deixa tudo amontoado, e
+   o resultado fica pior que antes.
+   ===================================================================== */
+
+/* ---------- 1. seções se separam por espaço, não por linha ---------- */
+.corte{border-top:0}
+section{padding:92px 0}
+@media (max-width:860px){section{padding:68px 0}}
+
+/* ---------- 2. antes e depois: contraste de TOM, não de caixa ----------
+   Eram dois painéis emoldurados, um deles com fundo cinza. A oposição já
+   está no texto e na cor: o "antes" em tom apagado, o "depois" em tinta
+   cheia com marcador azul. A caixa era redundante. */
+.contraste{border:0;border-radius:0;background:transparent;
+  grid-template-columns:1fr 1fr;gap:0 64px}
+.col-c{padding:0}
+.col-c + .col-c{border-left:0}
+.col-c.antes{background:transparent}
+.col-c h3{margin-bottom:22px;font-size:11px;letter-spacing:.15em}
+.col-c ul{gap:17px}
+.col-c li{font-size:16px}
+@media (max-width:760px){
+  .contraste{grid-template-columns:1fr;gap:40px}
+  .col-c + .col-c{border-top:0}
+}
+
+/* ---------- 3. etapas: o número é o separador ----------
+   As paredes verticais entre as quatro colunas transformavam uma sequência
+   em tabela. O "01" cresce e vira o marco visual; o espaço faz o resto. */
+.fluxo{border-top:0;gap:44px 52px;margin-top:10px}
+.passo{border-right:0;padding:0}
+.passo:not(:first-child){padding-left:0}
+.passo:last-child{padding-right:0}
+.passo .n{font-size:13px;letter-spacing:.14em;margin-bottom:14px;
+  padding-bottom:13px;border-bottom:1px solid var(--filete-2);
+  color:var(--azul)}
+.passo h3{font-size:20px;margin-bottom:10px}
+@media (max-width:900px){
+  .fluxo{grid-template-columns:1fr 1fr;gap:40px 48px}
+  .passo{border-bottom:0}
+  .passo:nth-child(n+3){border-bottom:0}
+}
+@media (max-width:560px){
+  .fluxo{grid-template-columns:1fr;gap:34px}
+  .passo{border-bottom:0;padding:0!important}
+}
+
+/* ---------- 4. recursos: sai a grade de planilha ----------
+   `gap:1px` sobre um fundo cinza desenhava linha entre todas as células.
+   Seis recursos não são uma matriz de dados: são seis parágrafos curtos. */
+.recursos{background:transparent;border:0;border-radius:0;
+  gap:46px 56px;overflow:visible}
+.rec{background:transparent;padding:0;gap:10px}
+.rec .et{font-size:11px;letter-spacing:.14em}
+.rec h3{font-size:18px}
+@media (max-width:900px){.recursos{gap:40px 44px}}
+@media (max-width:600px){.recursos{gap:34px}}
+
+/* ---------- 5. os quadros MANTÊM a moldura ----------
+   Cheguei a tirar e o Douglas pediu de volta, com razão. `.quadro` é a
+   mesma classe em dois lugares: os indicadores simulados e as tabelas de
+   implantação e mensalidade. Nos dois casos a borda faz o mesmo trabalho
+   que no herói: ela diz "isto é uma tela do sistema" e "isto é um quadro
+   de valores". Sem ela, número solto no fundo da página vira texto, e
+   justamente onde a pessoa precisa ler com atenção.
+   Nada a sobrescrever aqui, então. O trecho fica como registro de uma
+   decisão tomada, para ninguém "limpar" isto de novo achando que passou
+   despercebido. */
+
+/* ---------- 6. cartões do contato: sem caixa ---------- */
+.cartao{border:0;border-radius:0;background:transparent;padding:0}
+
+/* ---------- 7. o herói MANTÉM a moldura ----------
+   Aqui a borda não é enfeite: ela diz "isto é a tela do sistema". Tirar
+   faria a demonstração virar texto solto no fundo da página. Só suavizo a
+   sombra, que estava mais forte que o necessário. */
+.inst{box-shadow:0 1px 2px rgba(22,36,44,.04), 0 18px 40px -22px rgba(22,36,44,.22)}
+
+/* ---------- 8. "para quem": a linha fica, o vão some ----------
+   Esta seção já era a mais fluida da página. O problema era outro: o texto
+   terminava em 70% da largura e o filete seguia até 100%, deixando um vão
+   morto à direita. Agora a linha termina onde o conteúdo termina. */
+/* O filete ia até a borda do conteúdo (1160px) enquanto o texto parava em
+   68ch (~670px), deixando um terço de vão morto à direita de cada linha.
+   Agora a linha inteira tem a largura da leitura: o filete termina onde o
+   texto termina, e o parágrafo ocupa a coluna que sobrou. */
+/* O filete de topo da seção ia até 1160px enquanto os das linhas param em
+   950px. Duas larguras de régua na mesma lista chamam atenção para a
+   régua, não para o conteúdo. O título já abre a seção. */
+.publico{border-top:0}
+.pub{grid-template-columns:minmax(140px,210px) minmax(0,1fr);
+  gap:40px;padding:28px 0;max-width:950px}
+.pub p{max-width:none}
+@media (max-width:700px){.pub{max-width:none}}
+
+/* =====================================================================
+   RITMO: ESCALA DE TÍTULOS E LARGURA DE LEITURA
+   ---------------------------------------------------------------------
+   Segundo bloco, independente do primeiro. Pode ser aceito ou apagado sem
+   mexer na limpeza das molduras.
+
+   O DIAGNÓSTICO
+   Depois do herói, a página tem oito seções com exatamente a mesma
+   cadência: título de 35px, subtítulo de 17px, conteúdo. Oito vezes. Não
+   é feio, é MONÓTONO: o olho não tem onde descansar nem para onde correr,
+   e por isso tudo parece ter a mesma importância.
+
+   E a escala tem um buraco: 35px no título, 17/19px no resto. Não existe
+   nível intermediário, então ou a coisa é título de seção ou é texto
+   corrido. Com três níveis em vez de dois, a leitura ganha degraus.
+
+   O QUE MUDA
+   1. O título de seção sobe e aperta o espacejamento, virando uma
+      declaração de duas ou três linhas em vez de uma faixa de texto.
+   2. O subtítulo sobe junto e desce um pouco na página, lendo como
+      legenda do título, e não como uma segunda coluna de igual peso.
+   3. A largura de leitura deixa de ser sempre 1160px. Texto corrido tem
+      medida; grade de dados não tem. Variar isso é o que dá movimento
+      sem precisar de enfeite nenhum.
+   ===================================================================== */
+
+/* ---------- 1. o título de seção vira declaração ---------- */
+.tit{
+  font-size:clamp(27px,3.9vw,44px);
+  letter-spacing:-.026em;
+  line-height:1.1;
+  max-width:17ch;
+}
+.cab-1 .tit{max-width:22ch}
+
+/* ---------- 2. o subtítulo vira legenda ----------
+   Era uma segunda coluna de peso parecido, alinhada ao fim do título.
+   Agora é menor em relação ao título, começa um pouco mais abaixo e tem
+   medida de leitura própria. */
+.sub{font-size:18px;line-height:1.6;max-width:46ch}
+.cab-2{gap:48px;align-items:start;margin-bottom:54px}
+.cab-2 .sub{margin-top:10px}
+.cab-1{margin-bottom:46px}
+@media (max-width:860px){
+  .cab-2{gap:18px;margin-bottom:36px}
+  .cab-2 .sub{margin-top:0}
+  .sub{max-width:none}
+}
+
+/* ---------- 3. a largura varia conforme o que é ----------
+   Texto corrido ganha medida; o que é dado (indicadores, preço, o painel
+   do herói) continua ocupando a largura inteira, porque ali a largura é
+   informação. Essa alternância é o que faz a página andar. */
+.contraste{max-width:1060px}
+.fluxo{max-width:1100px}
+.recursos{max-width:1100px}
+@media (max-width:1100px){
+  .contraste,.fluxo,.recursos{max-width:none}
+}
+
+/* ---------- 4. respiro proporcional ao peso ----------
+   Padding igual em toda seção trata um argumento e uma lista de apoio
+   como a mesma coisa. As seções que abrem ideia nova respiram mais. */
+section{padding:88px 0}
+#preco,#contato{padding-top:108px}
+@media (max-width:860px){
+  section{padding:64px 0}
+  #preco,#contato{padding-top:72px}
+}
+
+/* ---------- 5. o degrau que faltava ----------
+   Títulos de item sobem um pouco e ficam todos na mesma altura, para
+   formarem um nível só, visivelmente abaixo do título de seção e
+   visivelmente acima do texto. */
+.rec h3,.passo h3,.pub h3{font-size:19.5px;letter-spacing:-.014em;line-height:1.3}
+.rec p,.passo p,.pub p{font-size:15.4px;line-height:1.6}
+
+/* ---------- 6. ícones de rótulo ----------
+   Ficam na mesma linha do rótulo, com `currentColor`: herdam o azul do
+   "CADASTRO" e do "ETAPA 01" e acompanham o tema sozinhos. O tamanho é
+   em `em`, então crescem e encolhem junto com o texto se a escala mudar.
+   `flex:none` evita que o ícone seja espremido quando o rótulo quebra. */
+.rec .et,.passo .n{display:flex;align-items:center;gap:8px}
+.ic-l{width:1.55em;height:1.55em;flex:none;opacity:.9}
+
+
+/* ---------- 7. faixas ilustrativas dos segmentos ----------
+   Desenho de linha, não fotografia: mesmo vocabulário dos ícones, poucos
+   KB, sem licença para controlar e sem requisição nova. Cada cena é
+   desenhada na largura inteira da linha, baixa e espaçada à esquerda
+   (onde está a leitura) e cheia à direita (no vão depois do parágrafo),
+   com transparência progressiva no mesmo sentido. Em tela estreita ela
+   sai: ali não há vão sobrando, e faixa atrás de texto em celular é
+   só ruído. */
+.pub{position:relative;max-width:none;grid-template-columns:minmax(140px,210px) minmax(0,640px)}
+.pub > *{position:relative;z-index:1}
+.pub::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-repeat:no-repeat;background-position:left bottom;background-size:100% auto;opacity:.45;-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,.055) 0,rgba(0,0,0,.07) 620px,rgba(0,0,0,.08) 890px,rgba(0,0,0,.34) 945px,#000 1015px);mask-image:linear-gradient(to right,rgba(0,0,0,.055) 0,rgba(0,0,0,.07) 620px,rgba(0,0,0,.08) 890px,rgba(0,0,0,.34) 945px,#000 1015px)}
+@media (max-width:1040px){.pub::after{display:none}}
+@media (max-width:700px){.pub{grid-template-columns:1fr}}
+.pub:has([data-seg="facilities"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%233E5A6B'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,100h70v16h-70Z'/%3E%3Cpath%20d='M170,94h86v22h-86Z'/%3E%3Cpath%20d='M320,88h74v28h-74Z'/%3E%3Cpath%20d='M450,78h96v38h-96Z'/%3E%3Cpath%20d='M458,86h21.3v22h-21.3ZM487.3,86h21.3v22h-21.3ZM516.7,86h21.3v22h-21.3Z'/%3E%3Cpath%20d='M600,66h80v50h-80Z'/%3E%3Cpath%20d='M608,74h28v13h-28ZM608,95h28v13h-28ZM644,74h28v13h-28ZM644,95h28v13h-28Z'/%3E%3Cpath%20d='M720,54h110v62h-110Z'/%3E%3Cpath%20d='M728,62h26v19h-26ZM728,89h26v19h-26ZM762,62h26v19h-26ZM762,89h26v19h-26ZM796,62h26v19h-26ZM796,89h26v19h-26Z'/%3E%3Cpath%20d='M870,30h76v86h-76Z'/%3E%3Cpath%20d='M878,38h26v11.5h-26ZM878,57.5h26v11.5h-26ZM878,77h26v11.5h-26ZM878,96.5h26v11.5h-26ZM912,38h26v11.5h-26ZM912,57.5h26v11.5h-26ZM912,77h26v11.5h-26ZM912,96.5h26v11.5h-26Z'/%3E%3Cpath%20d='M864,25h88v5h-88Z'/%3E%3Cpath%20d='M980,48h124v68h-124Z'/%3E%3Cpath%20d='M988,56h21v9h-21ZM988,73h21v9h-21ZM1017,56h21v9h-21ZM1017,73h21v9h-21ZM1046,56h21v9h-21ZM1046,73h21v9h-21ZM1075,56h21v9h-21ZM1075,73h21v9h-21Z'/%3E%3Cpath%20d='M1029.6,92h24.8v24h-24.8Z'/%3E%3Cpath%20d='M974,43h136v5h-136Z'/%3E%3Cpath%20d='M908,25V10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+.pub:has([data-seg="contrato-predial"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%233E5A6B'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h64v18h-64Z'/%3E%3Cpath%20d='M190,92h80v24h-80Z'/%3E%3Cpath%20d='M360,82h88v34h-88Z'/%3E%3Cpath%20d='M368,90h32v18h-32ZM408,90h32v18h-32Z'/%3E%3Cpath%20d='M500,30h78v30h-78Z'/%3E%3Cpath%20d='M512,60v56M566,60v56M512,88h54'/%3E%3Cpath%20d='M630,80h64v36h-64Z'/%3E%3Ccircle%20cx='650'%20cy='98'%20r='12'/%3E%3Cpath%20d='M694,94h26v22'/%3E%3Cpath%20d='M760,54h56v62h-56Z'/%3E%3Cpath%20d='M788,54v62'/%3E%3Ccircle%20cx='802'%20cy='92'%20r='4.5'/%3E%3Cpath%20d='M900,20h160v96h-160Z'/%3E%3Cpath%20d='M908,28h42.7v7.5h-42.7ZM908,43.5h42.7v7.5h-42.7ZM908,59h42.7v7.5h-42.7ZM908,74.5h42.7v7.5h-42.7ZM958.7,28h42.7v7.5h-42.7ZM958.7,43.5h42.7v7.5h-42.7ZM958.7,59h42.7v7.5h-42.7ZM958.7,74.5h42.7v7.5h-42.7ZM1009.3,28h42.7v7.5h-42.7ZM1009.3,43.5h42.7v7.5h-42.7ZM1009.3,59h42.7v7.5h-42.7ZM1009.3,74.5h42.7v7.5h-42.7Z'/%3E%3Cpath%20d='M964,92h32v24h-32Z'/%3E%3Cpath%20d='M894,15h172v5h-172Z'/%3E%3Cpath%20d='M1105,116V46'/%3E%3Ccircle%20cx='1105'%20cy='40'%20r='7'/%3E%3Cpath%20d='M1095,40h20'/%3E%3Cpath%20d='M1105,64h-16M1105,88h-16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+.pub:has([data-seg="condomínio"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%233E5A6B'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M30,116v-20h120v20'/%3E%3Cpath%20d='M54,96v20M78,96v20M102,96v20M126,96v20'/%3E%3Cpath%20d='M240,92h90v24h-90Z'/%3E%3Cpath%20d='M420,62h66v54h-66Z'/%3E%3Cpath%20d='M428,70h21v15h-21ZM428,93h21v15h-21ZM457,70h21v15h-21ZM457,93h21v15h-21Z'/%3E%3Cpath%20d='M486,69h16v11h-16M486,87h16v11h-16'/%3E%3Cpath%20d='M540,84h100v32h-100Z'/%3E%3Cpath%20d='M580,92h20v24h-20Z'/%3E%3Cpath%20d='M690,38h74v78h-74Z'/%3E%3Cpath%20d='M698,46h25v15.3h-25ZM698,69.3h25v15.3h-25ZM698,92.7h25v15.3h-25ZM731,46h25v15.3h-25ZM731,69.3h25v15.3h-25ZM731,92.7h25v15.3h-25Z'/%3E%3Cpath%20d='M764,46.5h16v11h-16M764,66h16v11h-16M764,85.5h16v11h-16'/%3E%3Cpath%20d='M800,22h62v94h-62Z'/%3E%3Cpath%20d='M808,30h19v13.5h-19ZM808,51.5h19v13.5h-19ZM808,73h19v13.5h-19ZM808,94.5h19v13.5h-19ZM835,30h19v13.5h-19ZM835,51.5h19v13.5h-19ZM835,73h19v13.5h-19ZM835,94.5h19v13.5h-19Z'/%3E%3Cpath%20d='M862,34.5h16v11h-16M862,58h16v11h-16M862,81.5h16v11h-16'/%3E%3Cpath%20d='M900,116l20-44M958,116l-20-44'/%3E%3Cpath%20d='M912,72h34'/%3E%3Cpath%20d='M922,72v24M936,72v24M922,96h14'/%3E%3Cpath%20d='M990,32h86v84h-86Z'/%3E%3Cpath%20d='M998,40h31v8.7h-31ZM998,56.7h31v8.7h-31ZM998,73.3h31v8.7h-31ZM1037,40h31v8.7h-31ZM1037,56.7h31v8.7h-31ZM1037,73.3h31v8.7h-31Z'/%3E%3Cpath%20d='M1024,92h18v24h-18Z'/%3E%3Cpath%20d='M984,27h98v5h-98Z'/%3E%3Cpath%20d='M1076,42h16v11h-16M1076,63h16v11h-16M1076,84h16v11h-16'/%3E%3Cpath%20d='M1118,116v-22'/%3E%3Ccircle%20cx='1118'%20cy='82'%20r='16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+.pub:has([data-seg="varejo"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%233E5A6B'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h80v18h-80Z'/%3E%3Cpath%20d='M190,90h86v26h-86Z'/%3E%3Cpath%20d='M190,103h86'/%3E%3Cpath%20d='M340,70h84v46h-84Z'/%3E%3Cpath%20d='M340,90h84'/%3E%3Cpath%20d='M348,76h20v12h-20Z'/%3E%3Cpath%20d='M376,76h16v12h-16Z'/%3E%3Cpath%20d='M348,96h24v14h-24Z'/%3E%3Cpath%20d='M500,82h90v34h-90Z'/%3E%3Cpath%20d='M492,82l8-14h90l814Z'/%3E%3Cpath%20d='M640,62h130v54h-130Z'/%3E%3Cpath%20d='M640,82h130M640,100h130'/%3E%3Cpath%20d='M668,100v16M742,100v16'/%3E%3Cpath%20d='M810,52h70v64h-70Z'/%3E%3Cpath%20d='M810,74h70M810,94h70'/%3E%3Cpath%20d='M818,58h20v12h-20Z'/%3E%3Cpath%20d='M846,58h16v12h-16Z'/%3E%3Cpath%20d='M818,80h24v12h-24Z'/%3E%3Cpath%20d='M920,36h200v80h-200Z'/%3E%3Cpath%20d='M910,36l10-16h200l1016Z'/%3E%3Cpath%20d='M960,20v16M1010,20v16M1060,20v16'/%3E%3Cpath%20d='M950,76h34v40h-34Z'/%3E%3Cpath%20d='M1004,52h90v30h-90Z'/%3E%3Cpath%20d='M998,100h104'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+.pub:has([data-seg="rede-cd"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%233E5A6B'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,90h76v26h-76Z'/%3E%3Cpath%20d='M33,90l7-12h76l712Z'/%3E%3Cpath%20d='M160,90h76v26h-76Z'/%3E%3Cpath%20d='M153,90l7-12h76l712Z'/%3E%3Cpath%20d='M280,90h76v26h-76Z'/%3E%3Cpath%20d='M273,90l7-12h76l712Z'/%3E%3Cpath%20d='M430,60h190v56h-190Z'/%3E%3Cpath%20d='M418,60l107-22,107,22'/%3E%3Cpath%20d='M474,80h70v36h-70Z'/%3E%3Cpath%20d='M474,92h70M474,104h70'/%3E%3Cpath%20d='M660,116V44M750,116V44M840,116V44'/%3E%3Cpath%20d='M660,44h180M660,72h180M660,98h180'/%3E%3Cpath%20d='M670,54h32v18h-32Z'/%3E%3Cpath%20d='M712,54h26v18h-26Z'/%3E%3Cpath%20d='M760,80h34v18h-34Z'/%3E%3Cpath%20d='M670,104h38v12h-38Z'/%3E%3Cpath%20d='M800,104h28v12h-28Z'/%3E%3Cpath%20d='M880,54h130v50h-130Z'/%3E%3Cpath%20d='M1010,104V68h26l22,26v10Z'/%3E%3Ccircle%20cx='916'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='986'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='1040'%20cy='110'%20r='10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .pub::after{opacity:.5}
+  :root:not([data-theme="light"]) .pub:has([data-seg="facilities"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,100h70v16h-70Z'/%3E%3Cpath%20d='M170,94h86v22h-86Z'/%3E%3Cpath%20d='M320,88h74v28h-74Z'/%3E%3Cpath%20d='M450,78h96v38h-96Z'/%3E%3Cpath%20d='M458,86h21.3v22h-21.3ZM487.3,86h21.3v22h-21.3ZM516.7,86h21.3v22h-21.3Z'/%3E%3Cpath%20d='M600,66h80v50h-80Z'/%3E%3Cpath%20d='M608,74h28v13h-28ZM608,95h28v13h-28ZM644,74h28v13h-28ZM644,95h28v13h-28Z'/%3E%3Cpath%20d='M720,54h110v62h-110Z'/%3E%3Cpath%20d='M728,62h26v19h-26ZM728,89h26v19h-26ZM762,62h26v19h-26ZM762,89h26v19h-26ZM796,62h26v19h-26ZM796,89h26v19h-26Z'/%3E%3Cpath%20d='M870,30h76v86h-76Z'/%3E%3Cpath%20d='M878,38h26v11.5h-26ZM878,57.5h26v11.5h-26ZM878,77h26v11.5h-26ZM878,96.5h26v11.5h-26ZM912,38h26v11.5h-26ZM912,57.5h26v11.5h-26ZM912,77h26v11.5h-26ZM912,96.5h26v11.5h-26Z'/%3E%3Cpath%20d='M864,25h88v5h-88Z'/%3E%3Cpath%20d='M980,48h124v68h-124Z'/%3E%3Cpath%20d='M988,56h21v9h-21ZM988,73h21v9h-21ZM1017,56h21v9h-21ZM1017,73h21v9h-21ZM1046,56h21v9h-21ZM1046,73h21v9h-21ZM1075,56h21v9h-21ZM1075,73h21v9h-21Z'/%3E%3Cpath%20d='M1029.6,92h24.8v24h-24.8Z'/%3E%3Cpath%20d='M974,43h136v5h-136Z'/%3E%3Cpath%20d='M908,25V10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"]) .pub:has([data-seg="contrato-predial"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h64v18h-64Z'/%3E%3Cpath%20d='M190,92h80v24h-80Z'/%3E%3Cpath%20d='M360,82h88v34h-88Z'/%3E%3Cpath%20d='M368,90h32v18h-32ZM408,90h32v18h-32Z'/%3E%3Cpath%20d='M500,30h78v30h-78Z'/%3E%3Cpath%20d='M512,60v56M566,60v56M512,88h54'/%3E%3Cpath%20d='M630,80h64v36h-64Z'/%3E%3Ccircle%20cx='650'%20cy='98'%20r='12'/%3E%3Cpath%20d='M694,94h26v22'/%3E%3Cpath%20d='M760,54h56v62h-56Z'/%3E%3Cpath%20d='M788,54v62'/%3E%3Ccircle%20cx='802'%20cy='92'%20r='4.5'/%3E%3Cpath%20d='M900,20h160v96h-160Z'/%3E%3Cpath%20d='M908,28h42.7v7.5h-42.7ZM908,43.5h42.7v7.5h-42.7ZM908,59h42.7v7.5h-42.7ZM908,74.5h42.7v7.5h-42.7ZM958.7,28h42.7v7.5h-42.7ZM958.7,43.5h42.7v7.5h-42.7ZM958.7,59h42.7v7.5h-42.7ZM958.7,74.5h42.7v7.5h-42.7ZM1009.3,28h42.7v7.5h-42.7ZM1009.3,43.5h42.7v7.5h-42.7ZM1009.3,59h42.7v7.5h-42.7ZM1009.3,74.5h42.7v7.5h-42.7Z'/%3E%3Cpath%20d='M964,92h32v24h-32Z'/%3E%3Cpath%20d='M894,15h172v5h-172Z'/%3E%3Cpath%20d='M1105,116V46'/%3E%3Ccircle%20cx='1105'%20cy='40'%20r='7'/%3E%3Cpath%20d='M1095,40h20'/%3E%3Cpath%20d='M1105,64h-16M1105,88h-16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"]) .pub:has([data-seg="condomínio"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M30,116v-20h120v20'/%3E%3Cpath%20d='M54,96v20M78,96v20M102,96v20M126,96v20'/%3E%3Cpath%20d='M240,92h90v24h-90Z'/%3E%3Cpath%20d='M420,62h66v54h-66Z'/%3E%3Cpath%20d='M428,70h21v15h-21ZM428,93h21v15h-21ZM457,70h21v15h-21ZM457,93h21v15h-21Z'/%3E%3Cpath%20d='M486,69h16v11h-16M486,87h16v11h-16'/%3E%3Cpath%20d='M540,84h100v32h-100Z'/%3E%3Cpath%20d='M580,92h20v24h-20Z'/%3E%3Cpath%20d='M690,38h74v78h-74Z'/%3E%3Cpath%20d='M698,46h25v15.3h-25ZM698,69.3h25v15.3h-25ZM698,92.7h25v15.3h-25ZM731,46h25v15.3h-25ZM731,69.3h25v15.3h-25ZM731,92.7h25v15.3h-25Z'/%3E%3Cpath%20d='M764,46.5h16v11h-16M764,66h16v11h-16M764,85.5h16v11h-16'/%3E%3Cpath%20d='M800,22h62v94h-62Z'/%3E%3Cpath%20d='M808,30h19v13.5h-19ZM808,51.5h19v13.5h-19ZM808,73h19v13.5h-19ZM808,94.5h19v13.5h-19ZM835,30h19v13.5h-19ZM835,51.5h19v13.5h-19ZM835,73h19v13.5h-19ZM835,94.5h19v13.5h-19Z'/%3E%3Cpath%20d='M862,34.5h16v11h-16M862,58h16v11h-16M862,81.5h16v11h-16'/%3E%3Cpath%20d='M900,116l20-44M958,116l-20-44'/%3E%3Cpath%20d='M912,72h34'/%3E%3Cpath%20d='M922,72v24M936,72v24M922,96h14'/%3E%3Cpath%20d='M990,32h86v84h-86Z'/%3E%3Cpath%20d='M998,40h31v8.7h-31ZM998,56.7h31v8.7h-31ZM998,73.3h31v8.7h-31ZM1037,40h31v8.7h-31ZM1037,56.7h31v8.7h-31ZM1037,73.3h31v8.7h-31Z'/%3E%3Cpath%20d='M1024,92h18v24h-18Z'/%3E%3Cpath%20d='M984,27h98v5h-98Z'/%3E%3Cpath%20d='M1076,42h16v11h-16M1076,63h16v11h-16M1076,84h16v11h-16'/%3E%3Cpath%20d='M1118,116v-22'/%3E%3Ccircle%20cx='1118'%20cy='82'%20r='16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"]) .pub:has([data-seg="varejo"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h80v18h-80Z'/%3E%3Cpath%20d='M190,90h86v26h-86Z'/%3E%3Cpath%20d='M190,103h86'/%3E%3Cpath%20d='M340,70h84v46h-84Z'/%3E%3Cpath%20d='M340,90h84'/%3E%3Cpath%20d='M348,76h20v12h-20Z'/%3E%3Cpath%20d='M376,76h16v12h-16Z'/%3E%3Cpath%20d='M348,96h24v14h-24Z'/%3E%3Cpath%20d='M500,82h90v34h-90Z'/%3E%3Cpath%20d='M492,82l8-14h90l814Z'/%3E%3Cpath%20d='M640,62h130v54h-130Z'/%3E%3Cpath%20d='M640,82h130M640,100h130'/%3E%3Cpath%20d='M668,100v16M742,100v16'/%3E%3Cpath%20d='M810,52h70v64h-70Z'/%3E%3Cpath%20d='M810,74h70M810,94h70'/%3E%3Cpath%20d='M818,58h20v12h-20Z'/%3E%3Cpath%20d='M846,58h16v12h-16Z'/%3E%3Cpath%20d='M818,80h24v12h-24Z'/%3E%3Cpath%20d='M920,36h200v80h-200Z'/%3E%3Cpath%20d='M910,36l10-16h200l1016Z'/%3E%3Cpath%20d='M960,20v16M1010,20v16M1060,20v16'/%3E%3Cpath%20d='M950,76h34v40h-34Z'/%3E%3Cpath%20d='M1004,52h90v30h-90Z'/%3E%3Cpath%20d='M998,100h104'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"]) .pub:has([data-seg="rede-cd"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,90h76v26h-76Z'/%3E%3Cpath%20d='M33,90l7-12h76l712Z'/%3E%3Cpath%20d='M160,90h76v26h-76Z'/%3E%3Cpath%20d='M153,90l7-12h76l712Z'/%3E%3Cpath%20d='M280,90h76v26h-76Z'/%3E%3Cpath%20d='M273,90l7-12h76l712Z'/%3E%3Cpath%20d='M430,60h190v56h-190Z'/%3E%3Cpath%20d='M418,60l107-22,107,22'/%3E%3Cpath%20d='M474,80h70v36h-70Z'/%3E%3Cpath%20d='M474,92h70M474,104h70'/%3E%3Cpath%20d='M660,116V44M750,116V44M840,116V44'/%3E%3Cpath%20d='M660,44h180M660,72h180M660,98h180'/%3E%3Cpath%20d='M670,54h32v18h-32Z'/%3E%3Cpath%20d='M712,54h26v18h-26Z'/%3E%3Cpath%20d='M760,80h34v18h-34Z'/%3E%3Cpath%20d='M670,104h38v12h-38Z'/%3E%3Cpath%20d='M800,104h28v12h-28Z'/%3E%3Cpath%20d='M880,54h130v50h-130Z'/%3E%3Cpath%20d='M1010,104V68h26l22,26v10Z'/%3E%3Ccircle%20cx='916'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='986'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='1040'%20cy='110'%20r='10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+}
+:root[data-theme="dark"] .pub::after{opacity:.5}
+:root[data-theme="dark"] .pub:has([data-seg="facilities"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,100h70v16h-70Z'/%3E%3Cpath%20d='M170,94h86v22h-86Z'/%3E%3Cpath%20d='M320,88h74v28h-74Z'/%3E%3Cpath%20d='M450,78h96v38h-96Z'/%3E%3Cpath%20d='M458,86h21.3v22h-21.3ZM487.3,86h21.3v22h-21.3ZM516.7,86h21.3v22h-21.3Z'/%3E%3Cpath%20d='M600,66h80v50h-80Z'/%3E%3Cpath%20d='M608,74h28v13h-28ZM608,95h28v13h-28ZM644,74h28v13h-28ZM644,95h28v13h-28Z'/%3E%3Cpath%20d='M720,54h110v62h-110Z'/%3E%3Cpath%20d='M728,62h26v19h-26ZM728,89h26v19h-26ZM762,62h26v19h-26ZM762,89h26v19h-26ZM796,62h26v19h-26ZM796,89h26v19h-26Z'/%3E%3Cpath%20d='M870,30h76v86h-76Z'/%3E%3Cpath%20d='M878,38h26v11.5h-26ZM878,57.5h26v11.5h-26ZM878,77h26v11.5h-26ZM878,96.5h26v11.5h-26ZM912,38h26v11.5h-26ZM912,57.5h26v11.5h-26ZM912,77h26v11.5h-26ZM912,96.5h26v11.5h-26Z'/%3E%3Cpath%20d='M864,25h88v5h-88Z'/%3E%3Cpath%20d='M980,48h124v68h-124Z'/%3E%3Cpath%20d='M988,56h21v9h-21ZM988,73h21v9h-21ZM1017,56h21v9h-21ZM1017,73h21v9h-21ZM1046,56h21v9h-21ZM1046,73h21v9h-21ZM1075,56h21v9h-21ZM1075,73h21v9h-21Z'/%3E%3Cpath%20d='M1029.6,92h24.8v24h-24.8Z'/%3E%3Cpath%20d='M974,43h136v5h-136Z'/%3E%3Cpath%20d='M908,25V10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"] .pub:has([data-seg="contrato-predial"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h64v18h-64Z'/%3E%3Cpath%20d='M190,92h80v24h-80Z'/%3E%3Cpath%20d='M360,82h88v34h-88Z'/%3E%3Cpath%20d='M368,90h32v18h-32ZM408,90h32v18h-32Z'/%3E%3Cpath%20d='M500,30h78v30h-78Z'/%3E%3Cpath%20d='M512,60v56M566,60v56M512,88h54'/%3E%3Cpath%20d='M630,80h64v36h-64Z'/%3E%3Ccircle%20cx='650'%20cy='98'%20r='12'/%3E%3Cpath%20d='M694,94h26v22'/%3E%3Cpath%20d='M760,54h56v62h-56Z'/%3E%3Cpath%20d='M788,54v62'/%3E%3Ccircle%20cx='802'%20cy='92'%20r='4.5'/%3E%3Cpath%20d='M900,20h160v96h-160Z'/%3E%3Cpath%20d='M908,28h42.7v7.5h-42.7ZM908,43.5h42.7v7.5h-42.7ZM908,59h42.7v7.5h-42.7ZM908,74.5h42.7v7.5h-42.7ZM958.7,28h42.7v7.5h-42.7ZM958.7,43.5h42.7v7.5h-42.7ZM958.7,59h42.7v7.5h-42.7ZM958.7,74.5h42.7v7.5h-42.7ZM1009.3,28h42.7v7.5h-42.7ZM1009.3,43.5h42.7v7.5h-42.7ZM1009.3,59h42.7v7.5h-42.7ZM1009.3,74.5h42.7v7.5h-42.7Z'/%3E%3Cpath%20d='M964,92h32v24h-32Z'/%3E%3Cpath%20d='M894,15h172v5h-172Z'/%3E%3Cpath%20d='M1105,116V46'/%3E%3Ccircle%20cx='1105'%20cy='40'%20r='7'/%3E%3Cpath%20d='M1095,40h20'/%3E%3Cpath%20d='M1105,64h-16M1105,88h-16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"] .pub:has([data-seg="condomínio"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M30,116v-20h120v20'/%3E%3Cpath%20d='M54,96v20M78,96v20M102,96v20M126,96v20'/%3E%3Cpath%20d='M240,92h90v24h-90Z'/%3E%3Cpath%20d='M420,62h66v54h-66Z'/%3E%3Cpath%20d='M428,70h21v15h-21ZM428,93h21v15h-21ZM457,70h21v15h-21ZM457,93h21v15h-21Z'/%3E%3Cpath%20d='M486,69h16v11h-16M486,87h16v11h-16'/%3E%3Cpath%20d='M540,84h100v32h-100Z'/%3E%3Cpath%20d='M580,92h20v24h-20Z'/%3E%3Cpath%20d='M690,38h74v78h-74Z'/%3E%3Cpath%20d='M698,46h25v15.3h-25ZM698,69.3h25v15.3h-25ZM698,92.7h25v15.3h-25ZM731,46h25v15.3h-25ZM731,69.3h25v15.3h-25ZM731,92.7h25v15.3h-25Z'/%3E%3Cpath%20d='M764,46.5h16v11h-16M764,66h16v11h-16M764,85.5h16v11h-16'/%3E%3Cpath%20d='M800,22h62v94h-62Z'/%3E%3Cpath%20d='M808,30h19v13.5h-19ZM808,51.5h19v13.5h-19ZM808,73h19v13.5h-19ZM808,94.5h19v13.5h-19ZM835,30h19v13.5h-19ZM835,51.5h19v13.5h-19ZM835,73h19v13.5h-19ZM835,94.5h19v13.5h-19Z'/%3E%3Cpath%20d='M862,34.5h16v11h-16M862,58h16v11h-16M862,81.5h16v11h-16'/%3E%3Cpath%20d='M900,116l20-44M958,116l-20-44'/%3E%3Cpath%20d='M912,72h34'/%3E%3Cpath%20d='M922,72v24M936,72v24M922,96h14'/%3E%3Cpath%20d='M990,32h86v84h-86Z'/%3E%3Cpath%20d='M998,40h31v8.7h-31ZM998,56.7h31v8.7h-31ZM998,73.3h31v8.7h-31ZM1037,40h31v8.7h-31ZM1037,56.7h31v8.7h-31ZM1037,73.3h31v8.7h-31Z'/%3E%3Cpath%20d='M1024,92h18v24h-18Z'/%3E%3Cpath%20d='M984,27h98v5h-98Z'/%3E%3Cpath%20d='M1076,42h16v11h-16M1076,63h16v11h-16M1076,84h16v11h-16'/%3E%3Cpath%20d='M1118,116v-22'/%3E%3Ccircle%20cx='1118'%20cy='82'%20r='16'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"] .pub:has([data-seg="varejo"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,98h80v18h-80Z'/%3E%3Cpath%20d='M190,90h86v26h-86Z'/%3E%3Cpath%20d='M190,103h86'/%3E%3Cpath%20d='M340,70h84v46h-84Z'/%3E%3Cpath%20d='M340,90h84'/%3E%3Cpath%20d='M348,76h20v12h-20Z'/%3E%3Cpath%20d='M376,76h16v12h-16Z'/%3E%3Cpath%20d='M348,96h24v14h-24Z'/%3E%3Cpath%20d='M500,82h90v34h-90Z'/%3E%3Cpath%20d='M492,82l8-14h90l814Z'/%3E%3Cpath%20d='M640,62h130v54h-130Z'/%3E%3Cpath%20d='M640,82h130M640,100h130'/%3E%3Cpath%20d='M668,100v16M742,100v16'/%3E%3Cpath%20d='M810,52h70v64h-70Z'/%3E%3Cpath%20d='M810,74h70M810,94h70'/%3E%3Cpath%20d='M818,58h20v12h-20Z'/%3E%3Cpath%20d='M846,58h16v12h-16Z'/%3E%3Cpath%20d='M818,80h24v12h-24Z'/%3E%3Cpath%20d='M920,36h200v80h-200Z'/%3E%3Cpath%20d='M910,36l10-16h200l1016Z'/%3E%3Cpath%20d='M960,20v16M1010,20v16M1060,20v16'/%3E%3Cpath%20d='M950,76h34v40h-34Z'/%3E%3Cpath%20d='M1004,52h90v30h-90Z'/%3E%3Cpath%20d='M998,100h104'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"] .pub:has([data-seg="rede-cd"])::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201160%20128'%3E%3Cg%20fill='none'%20stroke='%237E9AAB'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M40,90h76v26h-76Z'/%3E%3Cpath%20d='M33,90l7-12h76l712Z'/%3E%3Cpath%20d='M160,90h76v26h-76Z'/%3E%3Cpath%20d='M153,90l7-12h76l712Z'/%3E%3Cpath%20d='M280,90h76v26h-76Z'/%3E%3Cpath%20d='M273,90l7-12h76l712Z'/%3E%3Cpath%20d='M430,60h190v56h-190Z'/%3E%3Cpath%20d='M418,60l107-22,107,22'/%3E%3Cpath%20d='M474,80h70v36h-70Z'/%3E%3Cpath%20d='M474,92h70M474,104h70'/%3E%3Cpath%20d='M660,116V44M750,116V44M840,116V44'/%3E%3Cpath%20d='M660,44h180M660,72h180M660,98h180'/%3E%3Cpath%20d='M670,54h32v18h-32Z'/%3E%3Cpath%20d='M712,54h26v18h-26Z'/%3E%3Cpath%20d='M760,80h34v18h-34Z'/%3E%3Cpath%20d='M670,104h38v12h-38Z'/%3E%3Cpath%20d='M800,104h28v12h-28Z'/%3E%3Cpath%20d='M880,54h130v50h-130Z'/%3E%3Cpath%20d='M1010,104V68h26l22,26v10Z'/%3E%3Ccircle%20cx='916'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='986'%20cy='110'%20r='10'/%3E%3Ccircle%20cx='1040'%20cy='110'%20r='10'/%3E%3Cpath%20d='M8,116H1152'/%3E%3C/g%3E%3C/svg%3E")}
+
+/* =====================================================================
+   BRILHO DE FUNDO NAS SEÇÕES SÓBRIAS
+   ---------------------------------------------------------------------
+   O herói já tem o efeito: dois círculos grandes, de azul bem diluído,
+   com `filter:blur(70px)`, andando devagar. Ele some depois da primeira
+   dobra e o resto da página fica em fundo chapado. Depois da limpeza das
+   molduras isso ficou mais evidente: tirou-se a linha e, em algumas
+   seções, não entrou nada no lugar.
+
+   ONDE ENTRA, E POR QUE NÃO EM TODAS
+   Brilho em toda seção vira papel de parede e deixa de significar coisa
+   alguma. A divisão é a da própria página:
+
+     - Seções de ARGUMENTO: texto e ar. São as que ficam vazias, e são as
+       que recebem o brilho — o contraste antes/depois, as etapas e os
+       recursos.
+     - Seções de PROVA: já têm um objeto forte no meio (o quadro dos
+       indicadores, as tabelas de preço, as faixas dos segmentos). Brilho
+       ali embaçaria o que a pessoa foi ler. Ficam sem.
+     - O contato fecha a página e é a seção mais vazia de todas. Recebe
+       dois, como o herói, para o fim ecoar o começo.
+
+   A seção de perguntas ficou de fora por motivo técnico, não de gosto:
+   as células dela têm fundo próprio e opaco, então o brilho só apareceria
+   nos vãos de 1px entre elas.
+
+   POR QUE NÃO É UM CÍRCULO BORRADO, COMO NO HERÓI
+   Foi, na primeira tentativa, e deu errado de um jeito que só aparece no
+   render: um círculo posicionado meio para fora da seção é CORTADO pelo
+   recorte da seção bem onde ele é denso. O resultado foi um risco
+   horizontal reto atravessando a página embaixo das etapas.
+
+   Aqui o brilho é um `radial-gradient` ocupando a seção inteira, com uma
+   máscara vertical que o apaga ANTES da borda. Não existe corte porque
+   não há nada denso na borda para cortar. De quebra sai o `filter:blur`,
+   que é caro de rasterizar: o degradê já nasce suave.
+
+   As paradas da máscara estão em pixel e com folga maior que o passo da
+   animação (`vaga` desloca 40x50px), senão a mancha andaria para dentro
+   da zona opaca e o corte voltaria no meio do ciclo.
+   ===================================================================== */
+
+/* ---------- 1. tons próprios, mais fracos que os do herói ----------
+   Os números não vieram de gosto: o medidor compara o contraste do texto
+   com e sem o efeito, e o teto é o CUSTO DO PRÓPRIO HERÓI, que já está
+   no ar e aprovado. Duas correções no caminho: o --brilho-c começou em
+   .11 e ficou pior que o herói, porque é um azul mais fechado e o que
+   pesa é alfa x distância da cor do fundo; e no tema escuro (onde o
+   brilho CLAREIA) foi preciso descer de novo, porque as manchas do herói
+   são mais fortes mas caem fora da área de texto, e estas passam perto. */
+:root{
+  --brilho-c:rgba(62,123,186,.10);
+  --brilho-d:rgba(136,189,216,.17);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --brilho-c:rgba(125,178,228,.07);
+    --brilho-d:rgba(92,143,191,.09);
+  }
+}
+:root[data-theme="dark"]{
+  --brilho-c:rgba(125,178,228,.07);
+  --brilho-d:rgba(92,143,191,.09);
+}
+
+/* ---------- 2. a seção vira palco ---------- */
+main > section:has(.contraste),
+#funciona,
+#recursos,
+#contato{
+  position:relative;
+  overflow:hidden;
+  overflow:clip;
+}
+main > section:has(.contraste) > *,
+#funciona > *,
+#recursos > *,
+#contato > *{position:relative;z-index:1}
+
+main > section:has(.contraste)::before,
+#funciona::before,
+#recursos::before,
+#contato::before,
+#contato::after{
+  content:"";position:absolute;inset:-60px;z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,transparent 60px,
+    #000 200px,#000 calc(100% - 240px),transparent calc(100% - 120px));
+  mask-image:linear-gradient(to bottom,transparent 0,transparent 60px,
+    #000 200px,#000 calc(100% - 240px),transparent calc(100% - 120px));
+}
+
+/* ---------- 3. um por seção, alternando o lado ---------- */
+
+/* antes / depois: à direita, em cima */
+main > section:has(.contraste)::before{
+  background:radial-gradient(680px 600px at 92% 6%,var(--brilho-d),transparent 72%);
+  animation:vaga 34s ease-in-out infinite alternate;
+}
+
+/* etapas: à esquerda, embaixo */
+#funciona::before{
+  background:radial-gradient(640px 580px at 6% 94%,var(--brilho-c),transparent 72%);
+  animation:vaga 40s ease-in-out infinite alternate-reverse;
+}
+
+/* recursos: à direita, na altura do meio da lista */
+#recursos::before{
+  background:radial-gradient(700px 760px at 97% 52%,var(--brilho-c),transparent 72%);
+  animation:vaga 44s ease-in-out infinite alternate;
+}
+
+/* contato: dois, como o herói, para o fim ecoar o começo */
+#contato::before{
+  background:radial-gradient(600px 520px at 8% 10%,var(--brilho-d),transparent 72%);
+  animation:vaga 30s ease-in-out infinite alternate;
+}
+#contato::after{
+  background:radial-gradient(460px 420px at 95% 96%,var(--brilho-c),transparent 72%);
+  animation:vaga 36s ease-in-out infinite alternate-reverse;
+}
+
+/* ---------- 4. quando parar de andar ----------
+   Quem pediu menos movimento no sistema operacional recebe o brilho
+   parado: a mancha continua, o deslocamento some. Em tela estreita o
+   movimento também para, porque ali o ganho é mínimo e o custo de
+   bateria é contínuo. */
+@media (prefers-reduced-motion:reduce){
+  main > section:has(.contraste)::before,
+  #funciona::before,
+  #recursos::before,
+  #contato::before,
+  #contato::after{animation:none}
+}
+@media (max-width:860px){
+  main > section:has(.contraste)::before,
+  #funciona::before,
+  #recursos::before,
+  #contato::before,
+  #contato::after{animation:none}
+  main > section:has(.contraste)::before{background:radial-gradient(420px 460px at 96% 5%,var(--brilho-d),transparent 72%)}
+  #funciona::before{background:radial-gradient(400px 440px at 4% 95%,var(--brilho-c),transparent 72%)}
+  #recursos::before{background:radial-gradient(420px 560px at 100% 48%,var(--brilho-c),transparent 72%)}
+  #contato::before{background:radial-gradient(400px 380px at 2% 8%,var(--brilho-d),transparent 72%)}
+  #contato::after{background:radial-gradient(320px 300px at 98% 97%,var(--brilho-c),transparent 72%)}
+}
+
 </style>
 <script>
 /* Liga as transições de entrada ANTES da primeira pintura. Se este
@@ -798,22 +1181,22 @@ html.js .sem-anim,html.js .sem-anim *{transition:none !important}
     </div>
     <div class="fluxo">
       <div class="passo">
-        <span class="n">ETAPA 01</span>
+        <span class="n"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 3v6a1 1 0 0 0 1 1H19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12.8v4.4M9.8 15h4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ETAPA 01</span>
         <h3>Abrir</h3>
         <p>Unidade, localização, ativo (opcional), categoria e sintoma, em cascata. Descrição obrigatória, foto ou vídeo anexados na hora. Quem abre não escolhe prioridade nem prazo. O sistema calcula.</p>
       </div>
       <div class="passo">
-        <span class="n">ETAPA 02</span>
+        <span class="n"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.6" y="5.2" width="16.8" height="15.2" rx="2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.6 10h16.8M8.4 3.4v3.6M15.6 3.4v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 14.2h2M13.8 14.2h2M8.2 17.4h2M13.8 17.4h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ETAPA 02</span>
         <h3>Programar</h3>
         <p>O PCM ou o gestor define responsável e data. Chamado aberto pelo próprio técnico já cai na fila dele, sem passar por ninguém.</p>
       </div>
       <div class="passo">
-        <span class="n">ETAPA 03</span>
+        <span class="n"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.9 6.3a4.4 4.4 0 0 0 5.6 5.6l-8.1 8.1a2.3 2.3 0 0 1-3.3-3.3Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.9 6.3 17.6 3.6a4.4 4.4 0 0 1 2.9 8.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ETAPA 03</span>
         <h3>Executar</h3>
         <p>O técnico registra a solução, a causa, as horas gastas e as fotos do serviço. Se falta peça, o chamado vai para <b>Em espera</b> sem sumir do painel.</p>
       </div>
       <div class="passo">
-        <span class="n">ETAPA 04</span>
+        <span class="n"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.8 2.6 5.3 5.8.85-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.85Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ETAPA 04</span>
         <h3>Avaliar</h3>
         <p>O solicitante dá a nota de 0 a 10. Nota baixa reabre o chamado automaticamente e devolve para a fila. Não fica por isso mesmo.</p>
       </div>
@@ -829,15 +1212,15 @@ html.js .sem-anim,html.js .sem-anim *{transition:none !important}
       <p class="sub">Tudo abaixo já está no produto. Nada aqui depende de módulo extra ou de desenvolvimento sob medida.</p>
     </div>
     <div class="recursos">
-      <div class="rec"><span class="et">Cadastro</span><h3>Árvore de localizações</h3><p>Unidade, setor, área e sublocal. Um prédio, um condomínio ou uma carteira inteira de contratos na mesma estrutura.</p></div>
-      <div class="rec"><span class="et">Cadastro</span><h3>Ativos com TAG e criticidade</h3><p>Sistema, família, fabricante, modelo e criticidade A, B ou C. A criticidade entra direto no cálculo do prazo.</p></div>
-      <div class="rec"><span class="et">Configuração</span><h3>Catálogo do seu jeito</h3><p>Você edita categorias, sintomas, SLAs, fatores de parada e faixas de prioridade. Sem depender de código nem de fila de desenvolvimento.</p></div>
-      <div class="rec"><span class="et">Registro</span><h3>Foto e vídeo</h3><p>Anexo na abertura e na execução. O que o solicitante viu e o que o técnico entregou, lado a lado no mesmo chamado.</p></div>
-      <div class="rec"><span class="et">Registro</span><h3>Conversa no chamado</h3><p>Solicitante e equipe combinam acesso, horário e peça dentro do chamado. Decisão nenhuma fica perdida em grupo de mensagem.</p></div>
-      <div class="rec"><span class="et">Campo</span><h3>Uso no celular</h3><p>O técnico abre a fila dele no navegador do próprio telefone, com botões grandes e foto direto da câmera.</p></div>
-      <div class="rec"><span class="et">Acesso</span><h3>Quatro perfis</h3><p>Administrador, gestor/PCM, técnico e solicitante. O técnico enxerga só as unidades dele; o solicitante, só os próprios chamados.</p></div>
-      <div class="rec"><span class="et">Análise</span><h3>Indicadores prontos</h3><p>Backlog em horas, cumprimento de SLA, MTTR, chamados por categoria e por local, e reincidência por sintoma.</p></div>
-      <div class="rec"><span class="et">Segurança</span><h3>Dados isolados</h3><p>Cada empresa tem seu próprio espaço. A separação é feita no banco de dados, não na tela. Um cliente não alcança o dado do outro.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.4 5.2h10M9.4 12h10M9.4 18.8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 4v13.2a1.6 1.6 0 0 0 1.6 1.6H9.4M5 12h4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Cadastro</span><h3>Árvore de localizações</h3><p>Unidade, setor, área e sublocal. Um prédio, um condomínio ou uma carteira inteira de contratos na mesma estrutura.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.8 11.3V5.6a1.8 1.8 0 0 1 1.8-1.8h5.7a1.8 1.8 0 0 1 1.3.5l7 7a1.8 1.8 0 0 1 0 2.6l-5.7 5.7a1.8 1.8 0 0 1-2.6 0l-7-7a1.8 1.8 0 0 1-.5-1.3Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.1" cy="8.1" r="1.4" fill="currentColor"/></svg>Cadastro</span><h3>Ativos com TAG e criticidade</h3><p>Sistema, família, fabricante, modelo e criticidade A, B ou C. A criticidade entra direto no cálculo do prazo.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 6.4h14M5 12h14M5 17.6h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.2" cy="6.4" r="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="var(--chao)"/><circle cx="15.4" cy="12" r="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="var(--chao)"/><circle cx="8" cy="17.6" r="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="var(--chao)"/></svg>Configuração</span><h3>Catálogo do seu jeito</h3><p>Você edita categorias, sintomas, SLAs, fatores de parada e faixas de prioridade. Sem depender de código nem de fila de desenvolvimento.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.6 8.6a2 2 0 0 1 2-2h2l1.3-2.1h6.2L16.4 6.6h2a2 2 0 0 1 2 2v8.8a2 2 0 0 1-2 2H5.6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12.8" r="3.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Registro</span><h3>Foto e vídeo</h3><p>Anexo na abertura e na execução. O que o solicitante viu e o que o técnico entregou, lado a lado no mesmo chamado.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.4 12.4c0 3.9-3.8 7-8.4 7-1 0-2-.15-2.9-.43L4 20.4l1.5-3.6A6.5 6.5 0 0 1 3.6 12.4c0-3.9 3.8-7 8.4-7s8.4 3.1 8.4 7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.8 11.6h6.4M8.8 14.4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Registro</span><h3>Conversa no chamado</h3><p>Solicitante e equipe combinam acesso, horário e peça dentro do chamado. Decisão nenhuma fica perdida em grupo de mensagem.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6.6" y="2.8" width="10.8" height="18.4" rx="2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 5.6h2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="18" r="1.1" fill="currentColor"/></svg>Campo</span><h3>Uso no celular</h3><p>O técnico abre a fila dele no navegador do próprio telefone, com botões grandes e foto direto da câmera.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8.4" r="3.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 19.6a5.6 5.6 0 0 1 11.2 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5.6a3.1 3.1 0 0 1 0 5.9M17.4 14.6a5.6 5.6 0 0 1 3.2 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Acesso</span><h3>Quatro perfis</h3><p>Administrador, gestor/PCM, técnico e solicitante. O técnico enxerga só as unidades dele; o solicitante, só os próprios chamados.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.4 20v-5.6M12 20V7.2M16.6 20v-8.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Análise</span><h3>Indicadores prontos</h3><p>Backlog em horas, cumprimento de SLA, MTTR, chamados por categoria e por local, e reincidência por sintoma.</p></div>
+      <div class="rec"><span class="et"><svg class="ic-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 5.6v5.8c0 4.3 3 7.8 7 9.6 4-1.8 7-5.3 7-9.6V5.6Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.2 11.6V10a1.8 1.8 0 0 1 3.6 0v1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="9.2" y="11.6" width="5.6" height="4.4" rx="1.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Segurança</span><h3>Dados isolados</h3><p>Cada empresa tem seu próprio espaço. A separação é feita no banco de dados, não na tela. Um cliente não alcança o dado do outro.</p></div>
     </div>
   </div>
 </section>
@@ -919,39 +1302,39 @@ html.js .sem-anim,html.js .sem-anim *{transition:none !important}
 <section id="publico" class="corte">
   <div class="env">
     <div class="cab-1">
-      <h2 class="tit">Feito para quem cuida de prédio, loja e contrato, não de uma fábrica.</h2>
+      <h2 class="tit">Feito para quem cuida de prédios, plantas, shoppings, lojas, armazéns, contratos.</h2>
     </div>
     <div class="publico">
       <div class="pub">
-        <span class="et">Facilities</span>
+        <span class="et" data-seg="facilities">Facilities</span>
         <div>
           <h3>Empresas de facilities</h3>
           <p>Uma árvore de locais por cliente atendido e o SLA do contrato virando prazo automático em cada chamado. No fim do mês, o indicador de cumprimento é a prestação de contas pronta.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et">Contrato predial</span>
+        <span class="et" data-seg="contrato-predial">Contrato predial</span>
         <div>
           <h3>Contratos de manutenção predial</h3>
           <p>Elétrica, hidráulica, civil e infraestrutura já vêm no catálogo, com SLA por sintoma, de <b>curto-circuito</b> a <b>infiltração ou goteira</b>. Você ajusta os prazos e começa a operar.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et">Condomínio</span>
+        <span class="et" data-seg="condomínio">Condomínio</span>
         <div>
           <h3>Condomínios residenciais e comerciais</h3>
           <p>Síndico, portaria e zeladoria abrem pelo celular. O prestador vê apenas a fila dele; o morador acompanha o próprio chamado e dá a nota no final. A prestação de contas para a assembleia sai do próprio sistema.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et">Varejo</span>
+        <span class="et" data-seg="varejo">Varejo</span>
         <div>
           <h3>Varejo alimentício</h3>
           <p>Balcão refrigerado parado é ruptura de venda. Parada total corta o prazo pela metade sem ninguém precisar pedir, e o chamado de <b>alta temperatura</b> nasce como P1 por regra, não por telefonema.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et">Rede · CD</span>
+        <span class="et" data-seg="rede-cd">Rede · CD</span>
         <div>
           <h3>Redes de lojas e centros de distribuição</h3>
           <p>Várias unidades no mesmo sistema, com indicador comparando endereço a endereço. Cada técnico enxerga só a unidade dele; a gestão enxerga a rede inteira.</p>
