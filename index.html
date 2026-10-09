@@ -1224,6 +1224,67 @@ main > section:has(.contraste)::before{
 .pub{grid-template-columns:minmax(0,640px)}
 .publico{max-width:640px}
 
+
+/* =====================================================================
+   LARGURA NO COMPUTADOR
+   ---------------------------------------------------------------------
+   Medido antes de mexer: numa janela de 1920 o miolo tinha 1160px e
+   sobravam 380px de CADA lado — 40% da tela. E os cartões estavam em 38
+   a 48 caracteres por linha, abaixo da faixa confortável de leitura
+   (45 a 85). Alargar resolve os dois de uma vez.
+
+   Os parágrafos não esticam junto: cada texto corrido já tem teto
+   próprio em `ch` ou `em`, então o que se move são as caixas, não as
+   frases.
+
+   1480 não é gosto: é o último valor da varredura em que toda linha da
+   página fica dentro da faixa legível. Em 1560 o texto da tabela de
+   preço para de quebrar em três linhas e vai para duas de 96
+   caracteres, acima do limite de ~90.
+   ===================================================================== */
+
+/* A margem lateral vira duas. O site sempre teve 20px de cada lado, e
+   no celular está certo. Só que com o teto em 1160 essa margem nunca
+   aparecia acima de 1200px de janela. Subindo o teto para 1480 ela
+   passa a mandar entre 1200 e 1520, e 20px num notebook de 1440 cola o
+   conteúdo na borda. Abaixo de 1280 nada muda. */
+:root{--sobra:40px}
+@media (min-width:1280px){:root{--sobra:80px}}
+
+.env{width:min(1480px,calc(100% - var(--sobra)))}
+
+/* O vídeo é a única peça que é pura imagem em movimento, e é a que você
+   pediu para crescer. Vai além do miolo geral, mas não até a borda:
+   encostado na borda ele viraria faixa e passaria a disputar com o
+   herói logo acima. */
+.demo .env{width:min(1680px,calc(100% - var(--sobra)))}
+
+/* A seção dos públicos FICA em 1160 e com a margem antiga, e isso é
+   decisão. A largura das duas fotos laterais e o ponto onde o recorte
+   delas morre foram calculados em cima deste miolo e medidos contra o
+   contraste do texto. Alargar aqui comeria a margem onde elas moram:
+   num monitor de 1440 não sobraria lateral nenhuma e as fotos sumiriam.
+   E esta é justamente a seção que já usa a tela inteira — pelas fotos. */
+#publico .env{width:min(1160px,calc(100% - 40px))}
+
+/* OS TRÊS TEXTOS QUE NÃO TINHAM TETO
+   Quase todo texto corrido da página já tem medida própria em `ch`, e
+   por isso alargar o miolo move as caixas sem esticar as frases. Três
+   ficaram de fora, e a medição acusou:
+
+     perguntas frequentes   110 -> esticava com a tela, 158 num 2560
+     intro do cálculo        78 -> virou 95 com o miolo novo
+     condições de contrato   65 -> virou 88 com o miolo novo
+
+   Os dois últimos são culpa deste alargamento; o primeiro já era assim.
+   A correção é a mesma regra que o resto da página segue: medida em
+   `ch`, uma só, num token, para não virar três números soltos que
+   divergem na próxima mexida. */
+:root{--medida:62ch}
+.pg > h3, .pg > p{max-width:var(--medida)}
+.inst-cab p{max-width:var(--medida)}
+.orc-l p{max-width:var(--medida)}
+
 </style>
 <script>
 /* Liga as transições de entrada ANTES da primeira pintura. Se este
