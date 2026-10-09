@@ -1149,6 +1149,16 @@ main > section:has(.contraste)::before{
    em qualquer largura: o texto termina em `50vw + 60px`, então
    `50vw - 120px` de largura encosta exatamente ali.
 
+   POR QUE O `sizes` NÃO É A LARGURA DA CAIXA
+   Parece erro e não é. Estas fotos são recortadas por `object-fit:cover`
+   dentro de caixas ALTAS: quem manda na resolução necessária é a altura,
+   não a largura. A caixa da esquerda tem 160px de largura num monitor de
+   1440, mas 930 de altura — pedir ao navegador uma imagem de 160px
+   entregaria exatamente o borrão que havia. O `sizes` declara a largura
+   EQUIVALENTE à altura pedida (altura da caixa x proporção da foto), que
+   é o número que faz o srcset escolher certo. srcset e sizes não sabem
+   falar de altura; esta é a tradução.
+
    POR QUE A DA ESQUERDA É UMA TIRA
    Ali só existe a margem do miolo. A caixa é a margem mais 20px, e a
    forma chega no máximo a 74% dela — ela para antes da primeira letra
@@ -1478,14 +1488,18 @@ main > section:has(.contraste)::before{
 <section id="publico" class="corte">
   <div class="pub-fotos" aria-hidden="true">
     <picture class="pf pf-esq">
-      <source srcset="/publico-eletrica.webp" type="image/webp">
-      <img src="/publico-eletrica.jpg" alt="" width="760" height="879"
-           loading="lazy" decoding="async">
+      <source type="image/webp" sizes="(max-width:1280px) 1px, 810px"
+              srcset="/publico-eletrica.webp 810w, /publico-eletrica@2x.webp 1620w">
+      <img src="/publico-eletrica.jpg" sizes="(max-width:1280px) 1px, 810px"
+           srcset="/publico-eletrica.jpg 810w, /publico-eletrica@2x.jpg 1620w"
+           alt="" width="810" height="937" loading="lazy" decoding="async">
     </picture>
     <picture class="pf pf-dir">
-      <source srcset="/publico-chiller.webp" type="image/webp">
-      <img src="/publico-chiller.jpg" alt="" width="760" height="810"
-           loading="lazy" decoding="async">
+      <source type="image/webp" sizes="(max-width:1280px) 1px, 1760px"
+              srcset="/publico-chiller.webp 1760w, /publico-chiller@2x.webp 3520w">
+      <img src="/publico-chiller.jpg" sizes="(max-width:1280px) 1px, 1760px"
+           srcset="/publico-chiller.jpg 1760w, /publico-chiller@2x.jpg 3520w"
+           alt="" width="1760" height="1002" loading="lazy" decoding="async">
     </picture>
   </div>
   <div class="env">
