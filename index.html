@@ -1127,6 +1127,90 @@ main > section:has(.contraste)::before{
    conferir-paineis.mjs passa a cobrar. */
 .bt-1{box-shadow:none}
 
+
+/* =====================================================================
+   FOTOS NAS LATERAIS DOS PÚBLICOS
+   ---------------------------------------------------------------------
+   Uma sala elétrica à esquerda e uma central de água gelada à direita,
+   vindas da borda da tela e CORTADAS por uma forma, não apagadas por
+   degradê.
+
+   POR QUE MÁSCARA SVG, E NÃO clip-path
+   `clip-path:polygon()` só faz reta: o corte sairia anguloso, e o pedido
+   era arredondado. `clip-path:path()` faz curva, mas só aceita
+   coordenada em pixel — a forma não acompanharia a caixa, que muda de
+   largura com a tela. Máscara SVG com `preserveAspectRatio='none'` e
+   `mask-size:100% 100%` faz as duas coisas: curva e elástica.
+
+   POR QUE A DA DIREITA É MUITO MAIOR
+   Depois que os rótulos saíram, o texto ocupa 640px de um miolo de
+   1160. Sobra uma faixa larga à direita do parágrafo e quase nada à
+   esquerda dele. A caixa da direita para sempre a 60px do fim do texto,
+   em qualquer largura: o texto termina em `50vw + 60px`, então
+   `50vw - 120px` de largura encosta exatamente ali.
+
+   POR QUE A DA ESQUERDA É UMA TIRA
+   Ali só existe a margem do miolo. A caixa é a margem mais 20px, e a
+   forma chega no máximo a 74% dela — ela para antes da primeira letra
+   por construção, não por sorte.
+   ===================================================================== */
+#publico{position:relative;overflow:hidden}
+#publico > .env{position:relative;z-index:1}
+
+.pub-fotos{position:absolute;inset:0;z-index:0;pointer-events:none;contain:paint}
+.pf{position:absolute;display:block}
+.pf img{width:100%;height:100%;object-fit:cover;display:block;
+  /* EM COR. O que segura a foto no lugar de fundo não é tirar a cor,
+     é a opacidade e o recorte. A saturação é EMPURRADA para cima: a
+     opacidade mistura a foto com o cinza da página e lava a cor junto,
+     e sem o empurrão "em cor" viraria cinza levemente azulado. */
+  filter:saturate(1.2) contrast(1.02);
+  opacity:.68;
+}
+
+.pf-esq{left:0;top:9%;bottom:9%;
+  width:clamp(0px,calc((100vw - 1160px) / 2 + 20px),430px)}
+.pf-dir{right:0;top:6%;bottom:6%;
+  width:clamp(0px,calc(50vw - 120px),820px)}
+
+.pf-esq img{object-position:58% 50%;
+  -webkit-mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20100%20100%27%20preserveAspectRatio=%27none%27%3E%3Cpath%20fill=%27%23fff%27%20d=%27M0%200%20L72%200%20L10%20100%20L0%20100%20Z%27/%3E%3C/svg%3E);mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20100%20100%27%20preserveAspectRatio=%27none%27%3E%3Cpath%20fill=%27%23fff%27%20d=%27M0%200%20L72%200%20L10%20100%20L0%20100%20Z%27/%3E%3C/svg%3E);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.pf-dir img{object-position:50% 50%;
+  -webkit-mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20100%20100%27%20preserveAspectRatio=%27none%27%3E%3Cpath%20fill=%27%23fff%27%20d=%27M100%200%20L58%200%20L20%2046%20L26%20100%20L100%20100%20Z%27/%3E%3C/svg%3E);mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20100%20100%27%20preserveAspectRatio=%27none%27%3E%3Cpath%20fill=%27%23fff%27%20d=%27M100%200%20L58%200%20L20%2046%20L26%20100%20L100%20100%20Z%27/%3E%3C/svg%3E);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+
+@media (max-width:1280px){ .pub-fotos{display:none} }
+
+/* No escuro a foto é a coisa mais CLARA da tela, não a mais escura:
+   a dosagem se inverte. Entra escurecimento, senão as duas laterais
+   viram dois faróis em volta do texto. A cor fica nas duas. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .pf img{
+    filter:saturate(1.2) brightness(.5) contrast(1.0);opacity:.62}
+}
+:root[data-theme="dark"] .pf img{
+  filter:saturate(1.2) brightness(.5) contrast(1.0);opacity:.62}
+
+/* ---- as faixas de linha saem desta seção ----
+   Escrito aqui, e não apagado lá em cima, para dar para voltar atrás
+   com uma linha. */
+.pub::after{display:none}
+
+/* ---- sem a coluna de rótulos, cada linha é uma coluna só ----
+   640px é a mesma largura de texto de antes: o que mudou é onde ela
+   começa, não quanto ela mede.
+
+   E o FILETE entre as linhas encurta junto. Antes ele atravessava os
+   1160px do miolo porque havia conteúdo até lá: a coluna de rótulos de
+   um lado e a faixa de desenho do outro. Agora não há — ele ia morrer
+   no meio do nada e, pior, cruzava por cima da foto da direita, que é
+   onde a página ficou mais cheia. Termina onde o texto termina. */
+.pub{grid-template-columns:minmax(0,640px)}
+.publico{max-width:640px}
+
 </style>
 <script>
 /* Liga as transições de entrada ANTES da primeira pintura. Se este
@@ -1392,41 +1476,48 @@ main > section:has(.contraste)::before{
 
 <!-- ======================= PARA QUEM ======================= -->
 <section id="publico" class="corte">
+  <div class="pub-fotos" aria-hidden="true">
+    <picture class="pf pf-esq">
+      <source srcset="/publico-eletrica.webp" type="image/webp">
+      <img src="/publico-eletrica.jpg" alt="" width="760" height="879"
+           loading="lazy" decoding="async">
+    </picture>
+    <picture class="pf pf-dir">
+      <source srcset="/publico-chiller.webp" type="image/webp">
+      <img src="/publico-chiller.jpg" alt="" width="760" height="810"
+           loading="lazy" decoding="async">
+    </picture>
+  </div>
   <div class="env">
     <div class="cab-1">
       <h2 class="tit">Feito para quem cuida de prédios, plantas, shoppings, lojas, armazéns, contratos.</h2>
     </div>
     <div class="publico">
       <div class="pub">
-        <span class="et" data-seg="facilities">Facilities</span>
         <div>
           <h3>Empresas de facilities</h3>
           <p>Uma árvore de locais por cliente atendido e o SLA do contrato virando prazo automático em cada chamado. No fim do mês, o indicador de cumprimento é a prestação de contas pronta.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et" data-seg="contrato-predial">Contrato predial</span>
         <div>
           <h3>Contratos de manutenção predial</h3>
           <p>Elétrica, hidráulica, civil e infraestrutura já vêm no catálogo, com SLA por sintoma, de <b>curto-circuito</b> a <b>infiltração ou goteira</b>. Você ajusta os prazos e começa a operar.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et" data-seg="condomínio">Condomínio</span>
         <div>
           <h3>Condomínios residenciais e comerciais</h3>
           <p>Síndico, portaria e zeladoria abrem pelo celular. O prestador vê apenas a fila dele; o morador acompanha o próprio chamado e dá a nota no final. A prestação de contas para a assembleia sai do próprio sistema.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et" data-seg="varejo">Varejo</span>
         <div>
           <h3>Varejo alimentício</h3>
           <p>Balcão refrigerado parado é ruptura de venda. Parada total corta o prazo pela metade sem ninguém precisar pedir, e o chamado de <b>alta temperatura</b> nasce como P1 por regra, não por telefonema.</p>
         </div>
       </div>
       <div class="pub">
-        <span class="et" data-seg="rede-cd">Rede · CD</span>
         <div>
           <h3>Redes de lojas e centros de distribuição</h3>
           <p>Várias unidades no mesmo sistema, com indicador comparando endereço a endereço. Cada técnico enxerga só a unidade dele; a gestão enxerga a rede inteira.</p>
