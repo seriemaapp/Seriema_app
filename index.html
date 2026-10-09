@@ -1081,6 +1081,52 @@ main > section:has(.contraste)::before{
   .demo-v,.demo-i{border-radius:11px}
 }
 
+/* ---------- 10. painéis do sistema: sem sombra e sem contorno ----------
+   Vale para tudo que no site REPRESENTA o Seriema: o painel do herói com
+   a conta do prazo, o celular com a fila do técnico, os quadros de
+   indicadores e gráficos, e os quadros de preço.
+
+   Isto DESFAZ uma decisão anterior. Na passada de limpeza eu tinha tirado
+   as molduras da página e você pediu de volta justamente nos indicadores
+   e no preço. Agora o pedido é o contrário, e com um motivo melhor: a
+   ideia é alinhar o site ao visual que você está avaliando no próprio
+   sistema. Fica registrado para ninguém "consertar" isto de novo achando
+   que passou despercebido.
+
+   O que sai é só o CONTORNO EXTERNO e a sombra. As divisórias de dentro
+   ficam todas: a linha abaixo do cabeçalho de cada quadro, os filetes
+   entre as células de indicador, as linhas entre as faixas de preço. Sem
+   elas a tabela de valores viraria um amontoado de números.
+
+   O que separa o painel do fundo passa a ser só a diferença de cor entre
+   o branco e o cinza da página: 10 níveis no tema claro, 8 no escuro. É
+   pouco de propósito; se ficar frouxo demais na sua tela, o substituto
+   usual é um filete de 1px, não a sombra de volta. */
+.inst,
+.quadro,
+.fone{
+  box-shadow:none;
+  border:0;
+}
+
+/* O "+" entre os dois quadros de preço é o único que mantém o anel.
+   Ele não é tabela nem gráfico: é um conector que fica POR CIMA da borda
+   dos dois quadros (margin negativo). Sem anel, a metade de cima e a de
+   baixo do disco somem dentro do branco dos quadros e sobra um sinal de
+   mais flutuando torto. A sombra, essa sai. */
+.mais{box-shadow:none}
+
+/* ---------- 11. botões: sem sombra também ----------
+   Eram a última sombra da página. A elevação neles queria dizer "isto é
+   clicável", mas o botão azul cheio sobre fundo claro já diz isso sozinho:
+   a cor e o contraste fazem o trabalho que a sombra fazia.
+
+   O levantar de 1px no hover continua. Ele não é moldura, é resposta ao
+   ponteiro, e some sozinho em quem navega por toque ou pediu menos
+   movimento. Com isto a página fica com ZERO `box-shadow`, que é o que o
+   conferir-paineis.mjs passa a cobrar. */
+.bt-1{box-shadow:none}
+
 </style>
 <script>
 /* Liga as transições de entrada ANTES da primeira pintura. Se este
