@@ -346,11 +346,6 @@ h1 em,.tit em{font-style:normal;color:var(--azul)}
 .f-P4{color:var(--p4);background:var(--p4-fundo)}
 @media (max-width:520px){.saida{grid-template-columns:1fr 1fr}.saida > div:last-child{grid-column:1/-1}}
 
-.conta{
-  font-family:var(--m);font-weight:500;font-size:12.5px;color:var(--mudo);line-height:1.7;
-  padding:12px 22px;background:var(--chao-2);border-bottom:1px solid var(--filete-2);
-}
-.conta b{color:var(--tinta-2);font-weight:500}
 
 .chamado{padding:17px 22px 20px}
 .ch-linha{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:3px}
@@ -433,14 +428,12 @@ section{padding:74px 0}
 .barra .t i.b2{background:var(--azul-suave)}
 .barra .v{font-family:var(--m);font-weight:500;font-size:13px;color:var(--tinta);text-align:right;font-variant-numeric:tabular-nums}
 @media (max-width:520px){.barra{grid-template-columns:92px minmax(0,1fr) 36px;font-size:13px}}
-.legenda{font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--mudo);padding:0 20px 16px;line-height:1.5}
 
 /* telefone do técnico */
 .fone{
   border:1px solid var(--filete);border-radius:20px;background:var(--papel);
   box-shadow:var(--sombra);padding:8px;max-width:330px;margin-inline:auto;
 }
-.fone-nota{font-family:var(--m);font-weight:500;font-size:11.5px;color:var(--mudo);text-align:center;margin-top:12px;line-height:1.5}
 .fone-in{border:1px solid var(--filete-2);border-radius:14px;overflow:hidden}
 .fone-cab{background:var(--tinta);color:var(--chao);padding:11px 14px;display:flex;justify-content:space-between;align-items:center}
 :root[data-theme="dark"] .fone-cab{background:var(--chao-2);color:var(--tinta)}
@@ -1360,7 +1353,6 @@ main > section:has(.contraste)::before{
         <div><span>SLA de execução</span><strong>3,6<small>h</small></strong></div>
         <div><span>Prioridade</span><em class="faixa f-P1">P1</em></div>
       </div>
-      <p class="conta"><b>6 h de catálogo × 0,75 (parada parcial) × 0,80 (ativo B) = 3,6 h</b> · execução · faixa P1</p>
       <div class="chamado">
         <div class="ch-linha">
           <span class="ch-num">OS-2026-0431</span>
@@ -1381,11 +1373,11 @@ main > section:has(.contraste)::before{
 <section class="corte demo">
   <div class="env">
     <video class="demo-v" autoplay muted loop playsinline preload="metadata"
-           width="1920" height="1080" poster="/demo-seriema-poster.jpg">
-      <source src="/demo-seriema.webm" type="video/webm">
-      <source src="/demo-seriema.mp4" type="video/mp4">
+           width="1920" height="1080" poster="/demo-seriema-v2-poster.jpg">
+      <source src="/demo-seriema-v2.webm" type="video/webm">
+      <source src="/demo-seriema-v2.mp4" type="video/mp4">
     </video>
-    <img class="demo-i" src="/demo-seriema-poster.jpg" width="1920" height="1080"
+    <img class="demo-i" src="/demo-seriema-v2-poster.jpg" width="1920" height="1080"
          alt="Telas do Seriema: do painel de gestão, com indicadores e fila de chamados, até a execução do chamado no celular do técnico.">
   </div>
 </section>
@@ -1516,7 +1508,6 @@ main > section:has(.contraste)::before{
               </div>
             </div>
           </div>
-          <p class="fone-nota">A fila do técnico, no navegador do próprio celular.</p>
         </div>
       </div>
 
@@ -1530,7 +1521,6 @@ main > section:has(.contraste)::before{
             <div class="barra"><span class="r">Civil</span><span class="t"><i style="width:35.3%"></i></span><span class="v">12</span></div>
             <div class="barra"><span class="r">Infraestrutura</span><span class="t"><i style="width:26.5%"></i></span><span class="v">9</span></div>
           </div>
-          <p class="legenda">Elétrica e hidráulica respondem por 59% do volume. É onde vale montar estoque de peça.</p>
         </div>
         <div class="quadro">
           <div class="quadro-cab"><h3>Reincidência por sintoma</h3><span>90 dias · mesmo ativo</span></div>
@@ -1541,7 +1531,6 @@ main > section:has(.contraste)::before{
             <div class="barra"><span class="r">Porta danificada</span><span class="t"><i class="b2" style="width:42.9%"></i></span><span class="v">3</span></div>
             <div class="barra"><span class="r">Vazamento</span><span class="t"><i class="b2" style="width:28.6%"></i></span><span class="v">2</span></div>
           </div>
-          <p class="legenda">O mesmo sintoma voltando no mesmo ativo é o sinal de que o conserto tratou o efeito, não a causa.</p>
         </div>
       </div>
     </div>
